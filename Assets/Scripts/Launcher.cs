@@ -12,19 +12,27 @@ namespace uk.droidbuilders.droid_racing
         /// </summary>
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         [SerializeField]
-        private byte maxPlayersPerRoom = 8;
+        private byte maxPlayersPerRoom = 6;
 
         #endregion
         
         #region Public Fields
         [Tooltip("The Ui Panel to let the user enter name, connect and play")]
         [SerializeField]
-        private GameObject controlPanel;
-        [Tooltip("The UI Label to inform the user that the connection is in progress")]
+        private GameObject loginPanel;
+        [Tooltip("The UI Panel to show rooms")]
         [SerializeField]
-        private GameObject progressLabel;
+        private GameObject lobbyPanel;
+        
+        [Tooltip("The UI object to show rooms")]
+        [SerializeField]
+        private GameObject roomsPanel;
         #endregion
-
+        
+        [Tooltip("Region to connect to (eu, or us)")]
+        [SerializeField]
+        private string _region;
+        
         #region Private Fields
 
 
@@ -62,8 +70,9 @@ namespace uk.droidbuilders.droid_racing
         /// </summary>
         void Start()
         {
-            progressLabel.SetActive(false);
-            controlPanel.SetActive(true);
+            //progressLabel.SetActive(false);
+            loginPanel.SetActive(true);
+            lobbyPanel.SetActive(false);
         }
 
 
@@ -82,8 +91,9 @@ namespace uk.droidbuilders.droid_racing
         {
             Debug.Log("Connecting...");
             
-            progressLabel.SetActive(true);
-            controlPanel.SetActive(false);
+            lobbyPanel.SetActive(true);
+            loginPanel.SetActive(false);
+            
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.IsConnected)
             {
@@ -99,6 +109,14 @@ namespace uk.droidbuilders.droid_racing
         }
 
 
+
+    public void CreateNewRoom() {
+        RoomOptions options = new RoomOptions();
+        options.MaxPlayers = maxPlayersPerRoom;
+        options.PublishUserId = true;
+        PhotonNetwork.CreateRoom("", options);
+    }
+
     #endregion
 
     #region MonoBehaviourPunCallbacks Callbacks
@@ -110,7 +128,9 @@ namespace uk.droidbuilders.droid_racing
       // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
       if (isConnecting) 
       {
-          PhotonNetwork.JoinRandomRoom();
+          Debug.Log("Connecting to Lobby");
+          PhotonNetwork.JoinLobby();
+          //PhotonNetwork.JoinRandomRoom();
           isConnecting = false;
       }
     }
@@ -119,8 +139,8 @@ namespace uk.droidbuilders.droid_racing
     public override void OnDisconnected(DisconnectCause cause)
     {
       Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
-      progressLabel.SetActive(false);
-      controlPanel.SetActive(true);
+      lobbyPanel.SetActive(false);
+      loginPanel.SetActive(true);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -128,7 +148,15 @@ namespace uk.droidbuilders.droid_racing
         Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
         // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        //RoomOptions options = new RoomOptions();
+        //options.MaxPlayers = maxPlayersPerRoom;
+        //options.PublishUserId = true;
+        //PhotonNetwork.CreateRoom("", options);
+    }
+    
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("Room created");
     }
 
     public override void OnJoinedRoom()

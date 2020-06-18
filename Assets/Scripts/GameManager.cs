@@ -21,6 +21,15 @@ namespace uk.droidbuilders.droid_racing
         public static GameManager Instance;
         
         #endregion
+        
+        private Vector3[] spawnPoints = new [] {
+          new Vector3(-5f,2f,10f),
+          new Vector3(0f,2f,10f),
+          new Vector3(-5f,2f,7f),
+          new Vector3(0f,2f,7f),
+          new Vector3(-5f,2f,4f),
+          new Vector3(0f,2f,4f)
+        };
 
         #region Photon Callbacks
 
@@ -49,7 +58,7 @@ namespace uk.droidbuilders.droid_racing
                 Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
 
 
-                LoadArena();
+                //LoadArena();
             }
         }
         
@@ -77,9 +86,10 @@ namespace uk.droidbuilders.droid_racing
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    GameObject myPlayer = (GameObject)PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f,2f,0f), Quaternion.identity, 0);
+                    int x = PhotonNetwork.PlayerList.Length;
+                    GameObject myPlayer = (GameObject)PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[x], Quaternion.identity, 0);
                     myPlayer.GetComponent<CharacterController>().enabled = true;
-                    myPlayer.GetComponentInChildren<Camera>().enabled = true;
+                    myPlayer.GetComponent<CameraWork>().enabled = true;
                 }
                 else
                 {
