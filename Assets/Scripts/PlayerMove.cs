@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -39,7 +40,7 @@ public class PlayerMove : MonoBehaviourPun
     {
       
         webCalls = (WebCalls)GameObject.Find("WebCalls").GetComponent(typeof(WebCalls));
-        Debug.Log("Webcalls Object: {0}" + webCalls);
+        Debug.Log("PlayerMove: Webcalls Object: {0}" + webCalls);
         if (photonView.IsMine) {
         CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
         
@@ -123,23 +124,23 @@ public class PlayerMove : MonoBehaviourPun
     
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hit a collider");
+        Debug.Log("PlayerMove: Hit a collider");
         if (!photonView.IsMine)
         {
-            Debug.Log("It wasn't me");
+            Debug.Log("PlayerMove: It wasn't me");
             return;
         }
 
         if (other.tag == "Checkpoint")
         {
-            Debug.Log("Checkpoint crossed", other);
+            Debug.Log("PlayerMove: Checkpoint crossed", other);
             int checkPointNumber = other.GetComponent<Checkpoint>().checkPointNumber;
             checkPoints[checkPointNumber] = true;
             return;        Vector3 targetPosition;
         }
         if (other.tag == "Finish") 
         {
-            Debug.Log("Crossed the finish line");
+            Debug.Log("PlayerMove: Crossed the finish line");
             bool lapDone = true;
             bool lapStart = true;
             // Check if we need to start the timer...
@@ -148,7 +149,7 @@ public class PlayerMove : MonoBehaviourPun
                 if (checkPoints[i]) 
                 {
                     lapStart = false;
-                    Debug.Log("Don't restart timer");
+                    Debug.Log("PlayerMove: Don't restart timer");
                 }
             }
             for(int i = 0; i < numCheckpoints; i++)
@@ -156,12 +157,12 @@ public class PlayerMove : MonoBehaviourPun
                 if (!checkPoints[i]) 
                 {
                     lapDone = false;
-                    Debug.Log("You missed a checkpoint");
+                    Debug.Log("PlayerMove: You missed a checkpoint");
                 }
             }
             if (lapDone) 
             {
-                Debug.Log("Yay, you crossed the finsh line!");
+                Debug.Log("PlayerMove: Yay, you crossed the finsh line!");
                 laps++;
                 lastTime = Time.time - startTime;
                 if (bestTime == 0 || bestTime > lastTime)
@@ -174,7 +175,7 @@ public class PlayerMove : MonoBehaviourPun
             }
             if (lapStart) 
             {
-                Debug.Log("Starting a lap...");
+                Debug.Log("PlayerMove: Starting a lap...");
                 startTime = Time.time;
             }
         }

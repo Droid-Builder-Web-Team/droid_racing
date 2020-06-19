@@ -1,12 +1,8 @@
 using System;
 using System.Collections;
-
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Facebook.Unity;
-
-
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -35,12 +31,12 @@ namespace uk.droidbuilders.droid_racing
 
         public override void OnPlayerEnteredRoom(Player other)
         {
-            Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
+            Debug.LogFormat("GameManager: OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
 
 
             if (PhotonNetwork.IsMasterClient)
             {
-                Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+                Debug.LogFormat("GameManager: OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
 
 
                 LoadArena();
@@ -50,12 +46,12 @@ namespace uk.droidbuilders.droid_racing
 
         public override void OnPlayerLeftRoom(Player other)
         {
-            Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName); // seen when other disconnects
+            Debug.LogFormat("GameManager: OnPlayerLeftRoom() {0}", other.NickName); // seen when other disconnects
 
 
             if (PhotonNetwork.IsMasterClient)
             {
-                Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+                Debug.LogFormat("GameManager: OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
 
 
                 //LoadArena();
@@ -84,7 +80,7 @@ namespace uk.droidbuilders.droid_racing
             {
                 if (PlayerMove.LocalPlayerInstance == null )
                 {
-                    Debug.LogFormat("We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
+                    Debug.LogFormat("GameManager: We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     int x = PhotonNetwork.PlayerList.Length;
                     GameObject myPlayer = (GameObject)PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[x], Quaternion.identity, 0);
@@ -93,7 +89,7 @@ namespace uk.droidbuilders.droid_racing
                 }
                 else
                 {
-                    Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+                    Debug.LogFormat("GameManager: Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
                 }
             }
         }
@@ -106,6 +102,7 @@ namespace uk.droidbuilders.droid_racing
 
         public void LeaveRoom()
         {
+            Debug.Log("GameManager: LeavingRoom called");
             PhotonNetwork.LeaveRoom();
         }
 

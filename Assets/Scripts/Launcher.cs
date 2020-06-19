@@ -23,6 +23,10 @@ namespace uk.droidbuilders.droid_racing
         [Tooltip("The UI Panel to show rooms")]
         [SerializeField]
         private GameObject lobbyPanel;
+        [Tooltip("Connecting text box")]
+        [SerializeField]
+        private GameObject connectingText;
+      
         
         [Tooltip("The UI object to show rooms")]
         [SerializeField]
@@ -89,10 +93,11 @@ namespace uk.droidbuilders.droid_racing
         /// </summary>
         public void Connect()
         {
-            Debug.Log("Connecting...");
+            Debug.Log("Launcher: Connecting...");
             
-            lobbyPanel.SetActive(true);
+            lobbyPanel.SetActive(false);
             loginPanel.SetActive(false);
+            connectingText.SetActive(true);
             
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.IsConnected)
@@ -124,28 +129,30 @@ namespace uk.droidbuilders.droid_racing
 
     public override void OnConnectedToMaster()
     {
-      Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
+      Debug.Log("Launcher: OnConnectedToMaster() was called by PUN");
       // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
       if (isConnecting) 
       {
-          Debug.Log("Connecting to Lobby");
+          Debug.Log("Launcher: Connecting to Lobby");
           PhotonNetwork.JoinLobby();
           //PhotonNetwork.JoinRandomRoom();
           isConnecting = false;
+          connectingText.SetActive(false);
+          lobbyPanel.SetActive(true);
       }
     }
 
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-      Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
+      Debug.LogWarningFormat("Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
       lobbyPanel.SetActive(false);
       loginPanel.SetActive(true);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+        Debug.Log("Launcher: OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
         // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
         //RoomOptions options = new RoomOptions();
@@ -161,7 +168,7 @@ namespace uk.droidbuilders.droid_racing
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+        Debug.Log("Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
         PhotonNetwork.LoadLevel("MainScene");
     }
     #endregion
