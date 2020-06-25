@@ -38,6 +38,10 @@ namespace uk.droidbuilders.droid_racing
         private string _region;
         
         #region Private Fields
+        
+        public const string MAP_PROP_KEY = "map";
+        public const string GAME_MODE_PROP_KEY = "gm";   
+        public const string ROUND_START_TIME = "StartTime";
 
 
         /// <summary>
@@ -102,8 +106,9 @@ namespace uk.droidbuilders.droid_racing
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.IsConnected)
             {
-                // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-                PhotonNetwork.JoinRandomRoom();
+                PhotonNetwork.JoinLobby();
+                connectingText.SetActive(false);
+                lobbyPanel.SetActive(true);
             }
             else
             {
@@ -116,16 +121,29 @@ namespace uk.droidbuilders.droid_racing
 
 
     public void CreateNewRoom() {
+        Debug.Log("Launcher: CreateRoom() called");
         RoomOptions options = new RoomOptions();
+        string[] CustomOptions = new string[3];
+        CustomOptions[0] = MAP_PROP_KEY;
+        CustomOptions[1] = GAME_MODE_PROP_KEY;
+        CustomOptions[2] = ROUND_START_TIME;
+        float CurrentTime = (float)PhotonNetwork.Time;
+        Debug.Log("Launcher: CurrentTime: " + CurrentTime);
+        options.CustomRoomPropertiesForLobby = CustomOptions;
+        options.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { MAP_PROP_KEY, 1 }, { GAME_MODE_PROP_KEY, 0 }, { ROUND_START_TIME, CurrentTime} };
         options.MaxPlayers = maxPlayersPerRoom;
         options.PublishUserId = true;
-        PhotonNetwork.CreateRoom("", options);
+        PhotonNetwork.CreateRoom(null, options, null);
     }
 
     #endregion
 
     #region MonoBehaviourPunCallbacks Callbacks
 
+    private void OnPhotonCreateRoomFailed(object[] codeAndMsg)
+    {
+        Debug.LogErrorFormat("Launcher: Room creation failed with error code {0} and error message {1}", codeAndMsg[0], codeAndMsg[1]);
+    }
 
     public override void OnConnectedToMaster()
     {
@@ -153,12 +171,6 @@ namespace uk.droidbuilders.droid_racing
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log("Launcher: OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
-
-        // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-        //RoomOptions options = new RoomOptions();
-        //options.MaxPlayers = maxPlayersPerRoom;
-        //options.PublishUserId = true;
-        //PhotonNetwork.CreateRoom("", options);
     }
     
     public override void OnCreatedRoom()

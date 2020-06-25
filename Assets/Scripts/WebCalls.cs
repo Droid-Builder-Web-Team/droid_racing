@@ -9,17 +9,35 @@ public class WebCalls : MonoBehaviour
     public string apiKey;
     public string apiBase;
     
-    // Start is called before the first frame update
     public void UploadLap(string email, string name, float lap_time, int participents, string room_name)
     {
         Debug.Log("Uploading Lap Time");
-        string hash = Md5Sum(email + name + lap_time + apiKey);
+        string hash = Md5Sum(email + name + apiKey);
         WWWForm form = new WWWForm();
+        form.AddField("type", "lap");
         form.AddField("email", email);
         form.AddField("name", name);
         form.AddField("lap_time", lap_time.ToString());
         form.AddField("participents", participents.ToString());
         form.AddField("room_name", room_name);
+        form.AddField("hash", hash);
+        form.AddField("api", apiKey);
+        WWW www = new WWW(apiBase, form);
+    }
+    
+    public void UploadRace(string email, string name, float fastest_time, int number_laps, int participents, string room_name, float race_length)
+    {
+        Debug.Log("Uploading Race Results");
+        string hash = Md5Sum(email + name + apiKey);
+        WWWForm form = new WWWForm();
+        form.AddField("type", "race");
+        form.AddField("email", email);
+        form.AddField("name", name);
+        form.AddField("fastest_time", fastest_time.ToString());
+        form.AddField("number_laps", number_laps.ToString());
+        form.AddField("participents", participents.ToString());
+        form.AddField("room_name", room_name);      
+        form.AddField("race_length", race_length.ToString());
         form.AddField("hash", hash);
         form.AddField("api", apiKey);
         WWW www = new WWW(apiBase, form);

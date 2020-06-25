@@ -22,6 +22,7 @@ public class PlayerMove : MonoBehaviourPun
     public float elapsedTime;
     public float lastTime;
     public float bestTime;
+    private bool hasStarted = false;
     
     private static int numCheckpoints = 4; 
     public bool[] checkPoints = new bool[numCheckpoints];
@@ -42,32 +43,31 @@ public class PlayerMove : MonoBehaviourPun
         webCalls = (WebCalls)GameObject.Find("WebCalls").GetComponent(typeof(WebCalls));
         Debug.Log("PlayerMove: Webcalls Object: {0}" + webCalls);
         if (photonView.IsMine) {
-        CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+            CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
         
-        if (_cameraWork != null)
-        {
-            if (photonView.IsMine)
+            if (_cameraWork != null)
             {
+                Debug.Log("PlayerMove: Setting CameraWork to Follow");
                 _cameraWork.OnStartFollowing();
             }
-        }
-        else
-        {
-            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
-        }
+            else
+            {
+                Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+            }
         
         
-        characterController = GetComponent<CharacterController>();
-        if (PlayerUiPrefab != null)
-        {
-            GameObject _uiGo =  Instantiate(PlayerUiPrefab);
-            _uiGo.SendMessage ("SetTarget", this, SendMessageOptions.RequireReceiver);
+            characterController = GetComponent<CharacterController>();
+            if (PlayerUiPrefab != null)
+            {
+                Debug.Log("PlayerMove: Instantiating PlayerUI");
+                GameObject _uiGo =  Instantiate(PlayerUiPrefab);
+                _uiGo.SendMessage ("SetTarget", this, SendMessageOptions.RequireReceiver);
+            }
+            else
+            {
+                Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+            }               
         }
-        else
-        {
-            Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
-        }               
-      }
     }
 
     // Update is called once per frame
@@ -99,9 +99,10 @@ public class PlayerMove : MonoBehaviourPun
         // Move the controller
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed, 0);
         characterController.SimpleMove(forward * currentSpeed);
-        
-        elapsedTime = Time.time - startTime;
-        
+        if (hasStarted)
+        {
+            elapsedTime = Time.time - startTime;
+        }
       }
     }
     
@@ -111,14 +112,49 @@ public class PlayerMove : MonoBehaviourPun
         if (!photonView.IsMine)
         {
             enabled = false;
+            // #Important
+            // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
+        } 
+        Debug.Log("PlayerMove: Awake!");
+        
+        if ( photonView.IsMine)
+        {
+            PlayerMove.LocalPlayerInstance = this.gameObject;
         }
-        // #Important
-        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
-        PlayerMove.LocalPlayerInstance = this.gameObject;
-
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
         DontDestroyOnLoad(this.gameObject);  
+    }
+    
+    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
+    {
+        Debug.Log("PlayerMove: OnSceneLoaded");
+        this.CalledOnLevelWasLoaded(scene.buildIndex);
+    }
+    
+    void OnLevelWasLoaded(int level)
+    {
+        Debug.Log("PlayerMove: OnLevelWasLoaded");
+        this.CalledOnLevelWasLoaded(level);
+    }
+    
+    
+    void CalledOnLevelWasLoaded(int level)
+    {
+        // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
+        Debug.Log("PlayerMove: CalledOnLevelWasLoaded");
+        if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
+        {
+            transform.position = new Vector3(0f, 5f, 0f);
+        }
+        GameObject _uiGo = Instantiate(this.PlayerUiPrefab) as GameObject;
+        _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+    }
+    
+    private void OnDisable()
+    {
+        Debug.Log("PlayerMove: OnDisable");
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     
     
@@ -141,6 +177,7 @@ public class PlayerMove : MonoBehaviourPun
         if (other.tag == "Finish") 
         {
             Debug.Log("PlayerMove: Crossed the finish line");
+            hasStarted = true;
             bool lapDone = true;
             bool lapStart = true;
             // Check if we need to start the timer...
@@ -171,7 +208,6 @@ public class PlayerMove : MonoBehaviourPun
                     checkPoints[i] = false;
                 lapStart = true;
                 webCalls.UploadLap("email", PhotonNetwork.NickName, lastTime, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name);
-                //webCalls.TestLap();
             }
             if (lapStart) 
             {

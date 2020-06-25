@@ -35,6 +35,8 @@ namespace uk.droidbuilders.droid_racing
         [SerializeField]
         private Text allPlayersText;
         
+        public Text isMaster;
+        
         #endregion
         
         #region Private Fields
@@ -46,12 +48,19 @@ namespace uk.droidbuilders.droid_racing
         #region MonoBehaviour Callbacks
         void Awake()
         {
-
+            Debug.Log("PlayerUI: Awake called");
+            this.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>(), false);
         }
 
         void Update()
         {
           
+            if (target == null)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+
             if (lapNumberText != null)
             {
                 lapNumberText.text = "" + target.laps;
@@ -81,6 +90,12 @@ namespace uk.droidbuilders.droid_racing
                 allPlayersText.text = playerList;
             }
             
+            if (PhotonNetwork.IsMasterClient) {
+                isMaster.text = "Y";
+            } else {
+                isMaster.text = "N";
+            }
+            
         } 
         #endregion
 
@@ -89,6 +104,7 @@ namespace uk.droidbuilders.droid_racing
         
         public void SetTarget(PlayerMove _target)
         {
+            Debug.Log("PlayerUI: SetTarget called: " + target);
             if (_target == null)
             {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> PlayMakerManager target for PlayerUI.SetTarget.", this);

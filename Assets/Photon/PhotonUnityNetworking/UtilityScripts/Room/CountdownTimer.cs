@@ -43,18 +43,19 @@ namespace Photon.Pun.UtilityScripts
         /// </summary>
         public static event CountdownTimerHasExpired OnCountdownTimerHasExpired;
 
-        private bool isTimerRunning;
+        public bool isTimerRunning;
 
-        private float startTime;
+        public float startTime;
 
         [Header("Reference to a Text component for visualizing the countdown")]
-        public Text Text;
+        public TextMesh Text;
 
         [Header("Countdown time in seconds")]
         public float Countdown = 5.0f;
 
         public void Start()
         {
+            Debug.Log("CountdownTimer: Start called");
             if (Text == null)
             {
                 Debug.LogError("Reference to 'Text' is not set. Please set a valid reference.", this);
@@ -66,19 +67,26 @@ namespace Photon.Pun.UtilityScripts
         {
             if (!isTimerRunning)
             {
+                Debug.Log("CountdownTimer: isTimerRunning is False");
                 return;
             }
+            
+            Debug.Log("CountdownTimer: isTimerRunning is True");
 
             float timer = (float)PhotonNetwork.Time - startTime;
+            //Debug.Log("CountdownTimer: timer value: " + timer);
             float countdown = Countdown - timer;
+            //Debug.Log("CountdownTimer: countdown value: " + countdown);
 
             Text.text = string.Format("Game starts in {0} seconds", countdown.ToString("n0"));
 
             if (countdown > 0.0f)
             {
+                Debug.Log("CountdownTimer: Count down timer still running: " + countdown);
                 return;
             }
 
+            Debug.Log("CountdownTimer: Count down has finished");
             isTimerRunning = false;
 
             Text.text = string.Empty;
@@ -92,9 +100,12 @@ namespace Photon.Pun.UtilityScripts
         public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
         {
             object startTimeFromProps;
+            
+            //Debug.Log("CountdownTimer: OnRoomPropertiesUpdate called");
 
             if (propertiesThatChanged.TryGetValue(CountdownStartTime, out startTimeFromProps))
             {
+                //Debug.Log("CountdownTimer: Got value" + startTimeFromProps);
                 isTimerRunning = true;
                 startTime = (float)startTimeFromProps;
             }
