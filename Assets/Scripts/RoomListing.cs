@@ -21,7 +21,6 @@ public class RoomListing : MonoBehaviour
         _text.text = roomInfo.Name;
         _max.text = roomInfo.MaxPlayers.ToString();
         _current.text = roomInfo.PlayerCount.ToString();
-        //_text.text = "(" + roomInfo.MaxPlayers + ") " + roomInfo.Name;
     }
 
     public void JoinSelectedRoom(Text text) 

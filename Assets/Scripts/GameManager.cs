@@ -18,11 +18,15 @@ namespace uk.droidbuilders.droid_racing
         public static GameManager Instance;
         public Text infoText;
         public Canvas infoBox;
+        public GameObject playerList;
+        public Canvas resultsBox;
+        public Text timeLeftBox;
         
         public int waitBegin = 30; // How long to wait for more players if not minimum number of players
         public int minPlayers = 4; // Minimum number of players in room before automatically starting
         public int raceLength = 3; // Length of a game
         public int startDelay = 5; // Match countdown
+        public int endDelay = 10;  // How long to show the results screen before returning to lobby.
         
         #endregion
         
@@ -35,14 +39,9 @@ namespace uk.droidbuilders.droid_racing
           new Vector3(0f,1f,4f)
         };
         
-        public float startTime;
-        private float countdownStartTime;
-        private float raceStartTime;
-        private bool isRoomReady = false;
-        private bool countdownStarted = false;
-        private bool raceStarted = false;
-        private GameObject myPlayer;
-        
+        public float stateTime;
+        private string gameState = "prerace";
+        private GameObject myPlayer;                
         private WebCalls webCalls;
 
         #region Photon Callbacks
@@ -113,33 +112,33 @@ namespace uk.droidbuilders.droid_racing
             }
             if (PhotonNetwork.IsMasterClient)
             {
-                startTime = (float)PhotonNetwork.Time;
-                Debug.Log("GameManager: startTime set by MasterClient: " + startTime);
+                stateTime = (float)PhotonNetwork.Time;
+                Debug.Log("GameManager: startTime set by MasterClient: " + stateTime);
                 RoomOptions options = new RoomOptions();
-                options.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable {  { "StartTime", startTime} };
+                options.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable {  { "StartTime", stateTime} };
                 PhotonNetwork.CurrentRoom.SetCustomProperties(options.CustomRoomProperties);
             }
             else 
             {
-                startTime = float.Parse(PhotonNetwork.CurrentRoom.CustomProperties["StartTime"].ToString());
-                Debug.Log("GameManager: startTime got from custom properties is: " + startTime);
+                stateTime = float.Parse(PhotonNetwork.CurrentRoom.CustomProperties["StartTime"].ToString());
+                Debug.Log("GameManager: startTime got from custom properties is: " + stateTime);
             }
         }
-        
+/*        
         
         void Update()
         {
             float currentTime = (float)PhotonNetwork.Time;
             float waitingTime = currentTime - startTime;
-            if ( PhotonNetwork.PlayerList.Length < minPlayers && waitingTime < waitBegin && !isRoomReady && !raceStarted) 
+            if ( PhotonNetwork.PlayerList.Length < minPlayers && waitingTime < waitBegin && !isRoomReady && !raceStarted && !raceFinished) 
             {
                 infoText.text = "Waiting for " + (minPlayers - PhotonNetwork.PlayerList.Length).ToString("0") + " more players: " + (waitBegin - waitingTime).ToString("0");
                 return;
             }
             else 
             {
-                //startText.text = "Game starting in: " + countdown.ToString("n0"));
                 isRoomReady = true;
+
                 if (!countdownStarted && !raceStarted) 
                 {
                     countdownStartTime = (float)PhotonNetwork.Time;
@@ -162,6 +161,8 @@ namespace uk.droidbuilders.droid_racing
                         countdownStarted = false;
                         raceStartTime = (float)PhotonNetwork.Time;
                         infoBox.enabled = false;
+                        PhotonNetwork.CurrentRoom.IsOpen = false;
+                        PhotonNetwork.CurrentRoom.IsVisible = false;
                         myPlayer.GetComponent<CharacterController>().enabled = true;
                     }
                 }
@@ -169,13 +170,12 @@ namespace uk.droidbuilders.droid_racing
             }
             if (raceStarted) {
                 float duration = (float)PhotonNetwork.Time - raceStartTime;
+                timeLeftBox.text = (raceLength - duration).ToString("0") + "s";
                 if (duration >  raceLength)
                 {
                     Debug.Log("Race Finished");
                     myPlayer.GetComponent<CharacterController>().enabled = false;
                     Debug.Log("GameManager: Player laps: " + myPlayer.GetComponent<PlayerMove>().laps);
-                    infoText.text = "Race Over";
-                    infoBox.enabled = true;
                     webCalls.UploadRace("email", PhotonNetwork.NickName, myPlayer.GetComponent<PlayerMove>().bestTime, 
                             myPlayer.GetComponent<PlayerMove>().laps, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name, raceLength);
                     for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
@@ -186,10 +186,126 @@ namespace uk.droidbuilders.droid_racing
                         
                     }
                     raceStarted = false;
+                    isRoomReady = false;
+                    raceFinished = true;
+                    timeLeftBox.enabled = false;
+                    resultsBox.enabled = true;
+                    raceEndTime = (float)PhotonNetwork.Time;
                 }
             
             }
+            if (raceFinished) 
+            {
+                Debug.Log("GameManager: Race Finished");
+                if ((float)PhotonNetwork.Time > (raceEndTime + endDelay))
+                {
+                    Debug.Log("GameManager: raceEndTime: " + raceEndTime);
+                    Debug.Log("GameManager: endDelay: " + endDelay);
+                    //LeaveRoom();
+                }
+            }
             
+        }
+        */
+        
+        void Update() 
+        {
+            switch (gameState)
+            {
+                case "prerace":
+                    PreRace();
+                    break;
+                case "starting":
+                    Starting();
+                    break;
+                case "racing":
+                    Racing();
+                    break;
+                case "endrace":
+                    EndRace();
+                    break;
+                case "quit":
+                    Quit();
+                    break;
+                default:
+                    Debug.Log("GameManager: Invalid game state");
+                    break;
+            }
+        }
+        
+        void PreRace() 
+        {
+            Debug.Log("GameManager: Pre-Race");
+            infoBox.enabled = true;
+            resultsBox.enabled = false;
+            timeLeftBox.enabled = false;
+            float currentTime = (float)PhotonNetwork.Time;
+            float waitingTime = currentTime - stateTime;
+            if ( PhotonNetwork.PlayerList.Length < minPlayers && waitingTime < waitBegin)
+            {
+                infoText.text = "Waiting for " + (minPlayers - PhotonNetwork.PlayerList.Length).ToString("0") + " more players: " + (waitBegin - waitingTime).ToString("0");
+                return;
+            }
+            else 
+            {
+                PhotonNetwork.CurrentRoom.IsOpen = false;       // Do this asap, rather than waiting for next update() loop
+                PhotonNetwork.CurrentRoom.IsVisible = false;
+                stateTime = (float)PhotonNetwork.Time;
+                gameState = "starting";
+            }
+        }
+        
+        void Starting()
+        {
+            Debug.Log("GameManager: Starting");
+            float countdown = startDelay - ((float)PhotonNetwork.Time - stateTime);
+            if (countdown > 0)
+            {
+                infoText.text = "Game starting in: " + countdown.ToString("n0");
+            } 
+            else 
+            {
+                infoBox.enabled = false;
+                timeLeftBox.enabled = true;
+                myPlayer.GetComponent<CharacterController>().enabled = true;    // Enable throttle control!
+                stateTime = (float)PhotonNetwork.Time;
+                gameState = "racing";
+            }
+      
+        }
+        
+        void Racing()
+        {
+            Debug.Log("GameManager: Racing");
+            float duration = (float)PhotonNetwork.Time - stateTime;
+            timeLeftBox.text = (raceLength - duration).ToString("0") + "s";
+            if (duration >  raceLength)
+            {
+                Debug.Log("Race Finished");
+                myPlayer.GetComponent<CharacterController>().enabled = false;
+                Debug.Log("GameManager: Player laps: " + myPlayer.GetComponent<PlayerMove>().laps);
+                webCalls.UploadRace("email", PhotonNetwork.NickName, myPlayer.GetComponent<PlayerMove>().bestTime, 
+                            myPlayer.GetComponent<PlayerMove>().laps, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name, raceLength);
+                timeLeftBox.enabled = false;
+                resultsBox.enabled = true;
+                stateTime = (float)PhotonNetwork.Time;
+                gameState = "endrace";
+            }
+        }
+        
+        void EndRace()
+        {
+            Debug.Log("GameManager: EndRace");
+            if ((float)PhotonNetwork.Time > (stateTime + endDelay))
+            {
+                gameState = "quit";
+            }
+        }
+        
+        void Quit()
+        {
+            Debug.Log("GameManager: Quit");
+            LeaveRoom();
         }
 
         #endregion
@@ -202,8 +318,8 @@ namespace uk.droidbuilders.droid_racing
         {
             Debug.Log("GameManager: LeavingRoom called");
             PhotonNetwork.LeaveRoom();
-            Debug.Log("GameManager: Disconnecting from PhotonNetwork");
-            PhotonNetwork.Disconnect();
+            //Debug.Log("GameManager: Disconnecting from PhotonNetwork");
+            //PhotonNetwork.Disconnect();
         }
 
 

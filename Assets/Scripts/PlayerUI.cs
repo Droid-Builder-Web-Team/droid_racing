@@ -31,10 +31,6 @@ namespace uk.droidbuilders.droid_racing
         [SerializeField]
         private Text elapsedTimeText;
         
-        [Tooltip("Box to list all players")]
-        [SerializeField]
-        private Text allPlayersText;
-        
         public Text isMaster;
         
         #endregion
@@ -79,15 +75,6 @@ namespace uk.droidbuilders.droid_racing
             if (elapsedTimeText != null)
             {
                 elapsedTimeText.text = target.elapsedTime.ToString("F2") + "s";
-            }
-            if (allPlayersText != null) 
-            {
-                string playerList = "";
-                for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-                {
-                    playerList += PhotonNetwork.PlayerList[i].NickName + "\n";
-                }
-                allPlayersText.text = playerList;
             }
             
             if (PhotonNetwork.IsMasterClient) {

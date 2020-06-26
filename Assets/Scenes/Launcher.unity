@@ -3011,7 +3011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2f6ac88f95e81c49b11544923169f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayersPerRoom: 6
+  maxPlayersPerRoom: 8
   loginPanel: {fileID: 686492117}
   lobbyPanel: {fileID: 1201283368}
   connectingText: {fileID: 1796936019}
