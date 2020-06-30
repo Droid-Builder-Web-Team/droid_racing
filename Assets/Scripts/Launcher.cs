@@ -1,6 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 namespace uk.droidbuilders.droid_racing
 {
@@ -135,6 +136,12 @@ namespace uk.droidbuilders.droid_racing
         options.PublishUserId = true;
         PhotonNetwork.CreateRoom(null, options, null);
     }
+    
+    public void Offline()
+    {
+        SceneManager.LoadScene("Offline");
+    }
+    
 
     #endregion
 

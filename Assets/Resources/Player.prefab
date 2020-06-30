@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7305293779191547474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.465, z: -13.03}
+  m_LocalPosition: {x: 0, y: 0.413, z: -13.03}
   m_LocalScale: {x: 1, y: 0.6, z: 1}
   m_Children:
   - {fileID: 7220732134173531256}
@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 1258149023512949256, guid: 11c70b130e22cccfdb42953d18b3ddfc, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   bestTime: 0
   checkPoints: 00000000
   PlayerUiPrefab: {fileID: 8408580998405506925, guid: b71c16406dce10e3684582183b9176a7, type: 3}
+  PlayerMaterial: {fileID: 1258149023512949256, guid: 11c70b130e22cccfdb42953d18b3ddfc, type: 3}
 --- !u!143 &5931033494971972021
 CharacterController:
   m_ObjectHideFlags: 0
@@ -348,9 +349,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.0034861467
       objectReference: {fileID: 0}
+    - target: {fileID: -8347212014477414370, guid: 11c70b130e22cccfdb42953d18b3ddfc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 11c70b130e22cccfdb42953d18b3ddfc, type: 3}
       propertyPath: m_Name
       value: egg-simple
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762527604140350571, guid: 11c70b130e22cccfdb42953d18b3ddfc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c70b130e22cccfdb42953d18b3ddfc, type: 3}

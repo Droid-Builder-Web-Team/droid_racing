@@ -34,6 +34,8 @@ public class PlayerMove : MonoBehaviourPun
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
     
+    public Material PlayerMaterial;
+    
     private WebCalls webCalls;
     
     // Start is called before the first frame update
@@ -131,13 +133,13 @@ public class PlayerMove : MonoBehaviourPun
         Debug.Log("PlayerMove: OnSceneLoaded");
         this.CalledOnLevelWasLoaded(scene.buildIndex);
     }
-    
+/*    
     void OnLevelWasLoaded(int level)
     {
         Debug.Log("PlayerMove: OnLevelWasLoaded");
         this.CalledOnLevelWasLoaded(level);
     }
-    
+*/    
     
     void CalledOnLevelWasLoaded(int level)
     {
@@ -172,7 +174,7 @@ public class PlayerMove : MonoBehaviourPun
             Debug.Log("PlayerMove: Checkpoint crossed", other);
             int checkPointNumber = other.GetComponent<Checkpoint>().checkPointNumber;
             checkPoints[checkPointNumber] = true;
-            return;        Vector3 targetPosition;
+            return;   
         }
         if (other.tag == "Finish") 
         {
@@ -207,7 +209,12 @@ public class PlayerMove : MonoBehaviourPun
                 for(int i = 0; i < numCheckpoints; i++)
                     checkPoints[i] = false;
                 lapStart = true;
-                webCalls.UploadLap("email", PhotonNetwork.NickName, lastTime, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name);
+                StartCoroutine(webCalls.UploadLap("email", PhotonNetwork.NickName, lastTime, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name));
+                ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+                hashtable.Add("laps", laps);
+                hashtable.Add("best", bestTime);
+                hashtable.Add("last", lastTime);
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
             }
             if (lapStart) 
             {

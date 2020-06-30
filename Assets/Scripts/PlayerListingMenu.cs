@@ -42,7 +42,7 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
         foreach(Player player in PhotonNetwork.PlayerList)
         {
             PlayerListingEntry listing = Instantiate(_playerListing, _content);
-            listing.SetPlayerInfo(PhotonNetwork.LocalPlayer);
+            listing.SetPlayerInfo(player);
             _listings.Add(listing);
         }
     }

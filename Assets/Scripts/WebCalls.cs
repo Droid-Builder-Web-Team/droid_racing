@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Net;
+using UnityEngine.Networking;
+//using System.Net;
 
 public class WebCalls : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class WebCalls : MonoBehaviour
     public string apiKey;
     public string apiBase;
     
-    public void UploadLap(string email, string name, float lap_time, int participents, string room_name)
+    public IEnumerator UploadLap(string email, string name, float lap_time, int participents, string room_name)
     {
-        Debug.Log("Uploading Lap Time");
+        Debug.Log("WebCalls: Uploading Lap Time");
         string hash = Md5Sum(email + name + apiKey);
         WWWForm form = new WWWForm();
         form.AddField("type", "lap");
@@ -22,10 +23,23 @@ public class WebCalls : MonoBehaviour
         form.AddField("room_name", room_name);
         form.AddField("hash", hash);
         form.AddField("api", apiKey);
-        WWW www = new WWW(apiBase, form);
+        using (UnityWebRequest www = UnityWebRequest.Post(apiBase, form))
+        {
+            yield return www.SendWebRequest();
+            
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log("WebCalls: " + www.error);
+            }
+            else 
+            {
+                Debug.Log("WebCalls: Lap uploaded");
+            }
+        }
+        //WWW www = new WWW(apiBase, form);
     }
     
-    public void UploadRace(string email, string name, float fastest_time, int number_laps, int participents, string room_name, float race_length)
+    public IEnumerator UploadRace(string email, string name, float fastest_time, int number_laps, int participents, string room_name, float race_length)
     {
         Debug.Log("Uploading Race Results");
         string hash = Md5Sum(email + name + apiKey);
@@ -40,7 +54,20 @@ public class WebCalls : MonoBehaviour
         form.AddField("race_length", race_length.ToString());
         form.AddField("hash", hash);
         form.AddField("api", apiKey);
-        WWW www = new WWW(apiBase, form);
+        using (UnityWebRequest www = UnityWebRequest.Post(apiBase, form))
+        {
+            yield return www.SendWebRequest();
+            
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log("WebCalls: " + www.error);
+            }
+            else 
+            {
+                Debug.Log("WebCalls: Race uploaded");
+            }
+        }
+        //WWW www = new WWW(apiBase, form);
     }
     
     public string Md5Sum(string strToEncrypt)

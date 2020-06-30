@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,11 @@ namespace uk.droidbuilders.droid_racing
         public Canvas resultsBox;
         public Text timeLeftBox;
         
+        [SerializeField]
+        private ResultsListingEntry _resultListing;
+        public Transform _resultsContent;
+        
+        
         public int waitBegin = 30; // How long to wait for more players if not minimum number of players
         public int minPlayers = 4; // Minimum number of players in room before automatically starting
         public int raceLength = 3; // Length of a game
@@ -41,6 +47,7 @@ namespace uk.droidbuilders.droid_racing
         
         public float stateTime;
         private string gameState = "prerace";
+        private bool resultsDrawn;
         private GameObject myPlayer;                
         private WebCalls webCalls;
 
@@ -99,10 +106,13 @@ namespace uk.droidbuilders.droid_racing
             {
                 if (PlayerMove.LocalPlayerInstance == null )
                 {
-                    Debug.LogFormat("GameManager: We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
+                    Debug.LogFormat("GameManager: We are Instantiating LocalPlayer from {0}", SceneManager.GetActiveScene().name);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     int x = PhotonNetwork.PlayerList.Length;
                     myPlayer = (GameObject)PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[x], Quaternion.identity, 0);
+                    Material newMat = Resources.Load("eggMatRed", typeof(Material)) as Material;
+                    Debug.Log("GameManager: Material loaded: " + newMat);
+                    myPlayer.GetComponent<Renderer>().material = newMat;
                     myPlayer.GetComponent<CameraWork>().enabled = true;
                 }
                 else
@@ -124,89 +134,6 @@ namespace uk.droidbuilders.droid_racing
                 Debug.Log("GameManager: startTime got from custom properties is: " + stateTime);
             }
         }
-/*        
-        
-        void Update()
-        {
-            float currentTime = (float)PhotonNetwork.Time;
-            float waitingTime = currentTime - startTime;
-            if ( PhotonNetwork.PlayerList.Length < minPlayers && waitingTime < waitBegin && !isRoomReady && !raceStarted && !raceFinished) 
-            {
-                infoText.text = "Waiting for " + (minPlayers - PhotonNetwork.PlayerList.Length).ToString("0") + " more players: " + (waitBegin - waitingTime).ToString("0");
-                return;
-            }
-            else 
-            {
-                isRoomReady = true;
-
-                if (!countdownStarted && !raceStarted) 
-                {
-                    countdownStartTime = (float)PhotonNetwork.Time;
-                    countdownStarted = true;
-                }
-                //myPlayer.GetComponent<CharacterController>().enabled = true;
-            }
-            if (isRoomReady && !raceStarted)
-            {
-                if (countdownStarted) {
-                    float countdown = startDelay - ((float)PhotonNetwork.Time - countdownStartTime);
-                    if (countdown > 0)
-                    {
-                        infoText.text = "Game starting in: " + countdown.ToString("n0");
-                    } 
-                    else 
-                    {
-                        infoText.text = String.Empty;
-                        raceStarted = true;
-                        countdownStarted = false;
-                        raceStartTime = (float)PhotonNetwork.Time;
-                        infoBox.enabled = false;
-                        PhotonNetwork.CurrentRoom.IsOpen = false;
-                        PhotonNetwork.CurrentRoom.IsVisible = false;
-                        myPlayer.GetComponent<CharacterController>().enabled = true;
-                    }
-                }
-                Debug.Log("Room is ready");
-            }
-            if (raceStarted) {
-                float duration = (float)PhotonNetwork.Time - raceStartTime;
-                timeLeftBox.text = (raceLength - duration).ToString("0") + "s";
-                if (duration >  raceLength)
-                {
-                    Debug.Log("Race Finished");
-                    myPlayer.GetComponent<CharacterController>().enabled = false;
-                    Debug.Log("GameManager: Player laps: " + myPlayer.GetComponent<PlayerMove>().laps);
-                    webCalls.UploadRace("email", PhotonNetwork.NickName, myPlayer.GetComponent<PlayerMove>().bestTime, 
-                            myPlayer.GetComponent<PlayerMove>().laps, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name, raceLength);
-                    for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-                    {
-                        string name = PhotonNetwork.PlayerList[i].NickName;
-                        //float best_lap = PhotonNetwork.PlayerList[i].GetComponent<PlayerMove>().bestTime;
-                        //int number_laps = PhotonNetwork.PlayerList[i].GetComponent<PlayerMove>().laps;
-                        
-                    }
-                    raceStarted = false;
-                    isRoomReady = false;
-                    raceFinished = true;
-                    timeLeftBox.enabled = false;
-                    resultsBox.enabled = true;
-                    raceEndTime = (float)PhotonNetwork.Time;
-                }
-            
-            }
-            if (raceFinished) 
-            {
-                Debug.Log("GameManager: Race Finished");
-                if ((float)PhotonNetwork.Time > (raceEndTime + endDelay))
-                {
-                    Debug.Log("GameManager: raceEndTime: " + raceEndTime);
-                    Debug.Log("GameManager: endDelay: " + endDelay);
-                    //LeaveRoom();
-                }
-            }
-            
-        }
-        */
         
         void Update() 
         {
@@ -236,9 +163,9 @@ namespace uk.droidbuilders.droid_racing
         void PreRace() 
         {
             Debug.Log("GameManager: Pre-Race");
-            infoBox.enabled = true;
-            resultsBox.enabled = false;
-            timeLeftBox.enabled = false;
+            infoBox.gameObject.SetActive(true);
+            resultsBox.gameObject.SetActive(false);
+            timeLeftBox.transform.parent.gameObject.SetActive(false);
             float currentTime = (float)PhotonNetwork.Time;
             float waitingTime = currentTime - stateTime;
             if ( PhotonNetwork.PlayerList.Length < minPlayers && waitingTime < waitBegin)
@@ -263,10 +190,10 @@ namespace uk.droidbuilders.droid_racing
             {
                 infoText.text = "Game starting in: " + countdown.ToString("n0");
             } 
-            else 
+            else
             {
-                infoBox.enabled = false;
-                timeLeftBox.enabled = true;
+                infoBox.gameObject.SetActive(false);
+                timeLeftBox.transform.parent.gameObject.SetActive(true);
                 myPlayer.GetComponent<CharacterController>().enabled = true;    // Enable throttle control!
                 stateTime = (float)PhotonNetwork.Time;
                 gameState = "racing";
@@ -284,10 +211,10 @@ namespace uk.droidbuilders.droid_racing
                 Debug.Log("Race Finished");
                 myPlayer.GetComponent<CharacterController>().enabled = false;
                 Debug.Log("GameManager: Player laps: " + myPlayer.GetComponent<PlayerMove>().laps);
-                webCalls.UploadRace("email", PhotonNetwork.NickName, myPlayer.GetComponent<PlayerMove>().bestTime, 
-                            myPlayer.GetComponent<PlayerMove>().laps, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name, raceLength);
-                timeLeftBox.enabled = false;
-                resultsBox.enabled = true;
+                StartCoroutine(webCalls.UploadRace("email", PhotonNetwork.NickName, myPlayer.GetComponent<PlayerMove>().bestTime, 
+                            myPlayer.GetComponent<PlayerMove>().laps, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name, raceLength));
+                timeLeftBox.transform.parent.gameObject.SetActive(false);
+                resultsBox.gameObject.SetActive(true);
                 stateTime = (float)PhotonNetwork.Time;
                 gameState = "endrace";
             }
@@ -296,6 +223,11 @@ namespace uk.droidbuilders.droid_racing
         void EndRace()
         {
             Debug.Log("GameManager: EndRace");
+            if (!resultsDrawn) 
+            {
+                DrawResults();
+                resultsDrawn = true;
+            }
             if ((float)PhotonNetwork.Time > (stateTime + endDelay))
             {
                 gameState = "quit";
@@ -308,6 +240,20 @@ namespace uk.droidbuilders.droid_racing
             LeaveRoom();
         }
 
+        void DrawResults() 
+        {
+            var leaderboard = from p in PhotonNetwork.PlayerList
+                orderby (int) p.CustomProperties["laps"] ascending
+                select p;
+            int pos = 0;
+            foreach(var player in leaderboard)
+            {
+                pos++;
+                Debug.Log("GameManager: " + player.NickName + " " + player.CustomProperties["laps"]);
+                ResultsListingEntry listing = Instantiate(_resultListing, _resultsContent);
+                listing.SetResultsInfo(int.Parse(player.CustomProperties["laps"].ToString()), player.NickName, pos);
+            }
+        }
         #endregion
 
 
