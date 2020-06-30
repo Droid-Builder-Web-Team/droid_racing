@@ -121,7 +121,7 @@ namespace uk.droidbuilders.droid_racing
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     int x = PhotonNetwork.PlayerList.Length;
                     myPlayer = (GameObject)PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[x], Quaternion.identity, 0);
-                    Material newMat = Resources.Load("eggMatYellow", typeof(Material)) as Material;
+                    Material newMat = Resources.Load("eggMat" + colours[x], typeof(Material)) as Material;
                     Debug.Log("GameManager: Material loaded: " + newMat);
                     //
                     myPlayer.GetComponent<CameraWork>().enabled = true;
