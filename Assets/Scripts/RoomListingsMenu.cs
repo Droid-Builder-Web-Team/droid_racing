@@ -18,10 +18,10 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
       Debug.Log("Room list updated");
       foreach (RoomInfo info in roomList)  
       {
+          int index = _listings.FindIndex(x => x.RoomInfo.Name == info.Name); 
           if (info.RemovedFromList) 
           {
-              Debug.Log("Room to be removed from List: " + info.Name);
-              int index = _listings.FindIndex(x => x.RoomInfo.Name == info.Name);              
+              Debug.Log("Room to be removed from List: " + info.Name);            
               if (index != -1) 
               {
                  Destroy(_listings[index].gameObject);
@@ -30,10 +30,17 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
           }
           else 
           {
-              RoomListing listing = Instantiate(_roomListing, _content);
-                  if (listing != null)
-                      listing.SetRoomInfo(info);
-                      _listings.Add(listing);
+              Debug.Log("Room added: " + info.Name);
+              if (index != -1) {
+                  _listings[index].SetRoomInfo(info);
+              }
+              else 
+              {
+                  RoomListing listing = Instantiate(_roomListing, _content);
+                      if (listing != null)
+                          listing.SetRoomInfo(info);
+                          _listings.Add(listing);
+              }
           }
       }
       

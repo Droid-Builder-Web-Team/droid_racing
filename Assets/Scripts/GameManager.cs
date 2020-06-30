@@ -45,6 +45,17 @@ namespace uk.droidbuilders.droid_racing
           new Vector3(0f,1f,4f)
         };
         
+        private string[] colours = new [] {
+          "Red",
+          "Blue",
+          "Yellow",
+          "Green",
+          "Pink",
+          "Purple",
+          "Orange",
+          "Grey"
+        };
+        
         public float stateTime;
         private string gameState = "prerace";
         private bool resultsDrawn;
@@ -110,10 +121,12 @@ namespace uk.droidbuilders.droid_racing
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     int x = PhotonNetwork.PlayerList.Length;
                     myPlayer = (GameObject)PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[x], Quaternion.identity, 0);
-                    Material newMat = Resources.Load("eggMatRed", typeof(Material)) as Material;
+                    Material newMat = Resources.Load("eggMatYellow", typeof(Material)) as Material;
                     Debug.Log("GameManager: Material loaded: " + newMat);
-                    myPlayer.GetComponent<Renderer>().material = newMat;
+                    //
                     myPlayer.GetComponent<CameraWork>().enabled = true;
+                    GameObject mesh = myPlayer.transform.Find("egg-simple").gameObject.transform.Find("egg").gameObject;
+                    mesh.GetComponent<Renderer>().material = newMat;
                 }
                 else
                 {
