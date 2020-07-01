@@ -64,12 +64,12 @@ namespace uk.droidbuilders.droid_racing
             
             if (lastLapTimeText != null)
             {
-                lastLapTimeText.text = "Last Lap Time: " + target.lastTime + "s";
+                lastLapTimeText.text = "Last Lap Time: " + target.lastTime.ToString("F2") + "s";
             }
             
             if (bestLapTimeText != null)
             {
-                bestLapTimeText.text = "Best Lap Time: " + target.bestTime + "s";
+                bestLapTimeText.text = "Best Lap Time: " + target.bestTime.ToString("F2") + "s";
             }
             
             if (elapsedTimeText != null)

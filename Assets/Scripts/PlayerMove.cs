@@ -222,7 +222,7 @@ public class PlayerMove : MonoBehaviourPun
                 startTime = Time.time;
             }
         }
-        
+        Debug.Log("PlayerMove: Laps - " + laps + " Best - " + bestTime + " Last - " + lastTime);
     }
 
 }

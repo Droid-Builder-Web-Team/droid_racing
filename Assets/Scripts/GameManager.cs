@@ -61,6 +61,10 @@ namespace uk.droidbuilders.droid_racing
         private bool resultsDrawn;
         private GameObject myPlayer;                
         private WebCalls webCalls;
+        
+        public const string MAP_PROP_KEY = "map";
+        public const string GAME_MODE_PROP_KEY = "gm";   
+        public const string ROUND_START_TIME = "StartTime";
 
         #region Photon Callbacks
 
@@ -146,6 +150,15 @@ namespace uk.droidbuilders.droid_racing
                 stateTime = float.Parse(PhotonNetwork.CurrentRoom.CustomProperties["StartTime"].ToString());
                 Debug.Log("GameManager: startTime got from custom properties is: " + stateTime);
             }
+            
+            if ((int)PhotonNetwork.CurrentRoom.CustomProperties[GAME_MODE_PROP_KEY] == 1) 
+            {
+                gameState = "freerace";
+                infoBox.gameObject.SetActive(false);
+                myPlayer.GetComponent<CharacterController>().enabled = true; 
+                resultsBox.gameObject.SetActive(false);
+                timeLeftBox.transform.parent.gameObject.SetActive(false);
+            }
         }
         
         void Update() 
@@ -166,6 +179,9 @@ namespace uk.droidbuilders.droid_racing
                     break;
                 case "quit":
                     Quit();
+                    break;
+                case "freerace":
+                    FreeRace();
                     break;
                 default:
                     Debug.Log("GameManager: Invalid game state");
@@ -245,6 +261,11 @@ namespace uk.droidbuilders.droid_racing
             {
                 gameState = "quit";
             }
+        }
+        
+        void FreeRace()
+        {
+
         }
         
         void Quit()

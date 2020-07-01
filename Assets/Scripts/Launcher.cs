@@ -121,7 +121,7 @@ namespace uk.droidbuilders.droid_racing
 
 
 
-    public void CreateNewRoom() {
+    public void CreateNewRoom(int gameType) {
         Debug.Log("Launcher: CreateRoom() called");
         RoomOptions options = new RoomOptions();
         string[] CustomOptions = new string[3];
@@ -131,7 +131,7 @@ namespace uk.droidbuilders.droid_racing
         float CurrentTime = (float)PhotonNetwork.Time;
         Debug.Log("Launcher: CurrentTime: " + CurrentTime);
         options.CustomRoomPropertiesForLobby = CustomOptions;
-        options.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { MAP_PROP_KEY, 1 }, { GAME_MODE_PROP_KEY, 0 }, { ROUND_START_TIME, CurrentTime} };
+        options.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { MAP_PROP_KEY, 1 }, { GAME_MODE_PROP_KEY, gameType }, { ROUND_START_TIME, CurrentTime} };
         options.MaxPlayers = maxPlayersPerRoom;
         options.PublishUserId = true;
         PhotonNetwork.CreateRoom(null, options, null);
