@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: e2341a9d03e86ec4290c72b1e22bbc7c, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015259, y: -30}
-  m_SizeDelta: {x: 313.5374, y: 60}
+  m_AnchoredPosition: {x: 0.000015259, y: -20.14}
+  m_SizeDelta: {x: 313.5374, y: 40.273247}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &12408542
 MonoBehaviour:
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: e41ac29b850eee0eb9703a815e02c745, type: 3}
+  m_Texture: {fileID: 2800000, guid: 2d97d506636d221d382f62de4feae0d7, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1698,7 +1698,6 @@ RectTransform:
   - {fileID: 1521832261}
   - {fileID: 766697956}
   - {fileID: 12408541}
-  - {fileID: 1429440576}
   - {fileID: 1492730473}
   - {fileID: 1924249338}
   m_Father: {fileID: 525415359}
@@ -1825,81 +1824,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1429440575
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1429440576}
-  - component: {fileID: 1429440578}
-  - component: {fileID: 1429440577}
-  m_Layer: 5
-  m_Name: WASD
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1429440576
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429440575}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1201283369}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -378.6, y: -146}
-  m_SizeDelta: {x: 240.3995, y: 208.29123}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1429440577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429440575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8963ed471132d58c1ba2823cda08060c, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1429440578
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429440575}
-  m_CullTransparentMesh: 0
 --- !u!1 &1434822870
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,12 +2048,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1201283369}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 17.1, y: -153.95}
-  m_SizeDelta: {x: 466.17035, y: 171.9}
+  m_AnchoredPosition: {x: -122, y: -154.53}
+  m_SizeDelta: {x: 744.9517, y: 228.49997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1492730474
 MonoBehaviour:
@@ -2164,10 +2088,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Welcome to the online 39.1% Racing Season. \n\nYour droid is controlled
-    with either the WASD keys, or the arrow keys. If there is no race listed on the
-    right, or if you want to create your own, click on Create Race. Otherwise, click
-    on any ongoing race in the list. "
+  m_Text: "Welcome to the online 39.1% Racing Season.\n\nYour droid is controlledwith
+    either the WASD keys, or the arrow keys. If there is no race listed on the right,
+    or if you want to create your own, click on Create Race. Otherwise, click on
+    any ongoing race in the list.\n\nThere are two types of race:\n\n     Free Race
+    - No time limit, just see how fast a lap you can do. Players can come and go
+    as they please.\n\n     Championship - See how many laps you can do in a set
+    time. This mode waits for the room to fill, or for the timer to run out before
+    starting. Once started, noone else can join the race."
 --- !u!222 &1492730475
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3067,7 +2995,7 @@ RectTransform:
   m_Children:
   - {fileID: 1221270164}
   m_Father: {fileID: 1201283369}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
