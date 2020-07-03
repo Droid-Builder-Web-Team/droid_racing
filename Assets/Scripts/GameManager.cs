@@ -113,6 +113,7 @@ namespace uk.droidbuilders.droid_racing
         {
             Instance = this;
             webCalls = (WebCalls)GameObject.Find("WebCalls").GetComponent(typeof(WebCalls));
+            PhotonNetwork.InstantiateSceneObject("gonk_animated", new Vector3(52f, 0f, 14f ), Quaternion.identity, 0);
             if (playerPrefab == null)
             {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'",this);
