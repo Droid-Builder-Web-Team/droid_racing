@@ -8,7 +8,7 @@ ModelImporter:
     second: Gonk|GonkWalk
   externalObjects: {}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 1
     materialSearch: 1
     materialLocation: 0
