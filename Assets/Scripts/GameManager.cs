@@ -4,7 +4,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using Facebook.Unity;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -24,7 +23,7 @@ namespace uk.droidbuilders.droid_racing
         public Text timeLeftBox;
         
         [SerializeField]
-        private ResultsListingEntry _resultListing;
+        public ResultsListingEntry _resultListing;
         public Transform _resultsContent;
         
         
@@ -280,13 +279,13 @@ namespace uk.droidbuilders.droid_racing
             var leaderboard = from p in PhotonNetwork.PlayerList
                 orderby (int) p.CustomProperties["laps"] ascending
                 select p;
-            int pos = 0;
+            int pos = PhotonNetwork.PlayerList.Length;
             foreach(var player in leaderboard)
             {
-                pos++;
-                Debug.Log("GameManager: " + player.NickName + " " + player.CustomProperties["laps"]);
+                Debug.Log("GameManager: " + player.NickName + " " + player.CustomProperties["laps"] + " Position: " + pos);
                 ResultsListingEntry listing = Instantiate(_resultListing, _resultsContent);
                 listing.SetResultsInfo(int.Parse(player.CustomProperties["laps"].ToString()), player.NickName, pos);
+                pos--;
             }
         }
         #endregion

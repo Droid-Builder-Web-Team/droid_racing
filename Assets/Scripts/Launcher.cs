@@ -20,18 +20,18 @@ namespace uk.droidbuilders.droid_racing
         #region Public Fields
         [Tooltip("The Ui Panel to let the user enter name, connect and play")]
         [SerializeField]
-        private GameObject loginPanel;
+        public GameObject loginPanel;
         [Tooltip("The UI Panel to show rooms")]
         [SerializeField]
-        private GameObject lobbyPanel;
+        public GameObject lobbyPanel;
         [Tooltip("Connecting text box")]
         [SerializeField]
-        private GameObject connectingText;
+        public GameObject connectingText;
       
         
         [Tooltip("The UI object to show rooms")]
         [SerializeField]
-        private GameObject roomsPanel;
+        public GameObject roomsPanel;
         #endregion
         
         [Tooltip("Region to connect to (eu, or us)")]
@@ -43,6 +43,7 @@ namespace uk.droidbuilders.droid_racing
         public const string MAP_PROP_KEY = "map";
         public const string GAME_MODE_PROP_KEY = "gm";   
         public const string ROUND_START_TIME = "StartTime";
+        public const string RACE_NAME = "rn";
 
 
         /// <summary>
@@ -124,14 +125,32 @@ namespace uk.droidbuilders.droid_racing
     public void CreateNewRoom(int gameType) {
         Debug.Log("Launcher: CreateRoom() called");
         RoomOptions options = new RoomOptions();
-        string[] CustomOptions = new string[3];
+        string[] CustomOptions = new string[4];
         CustomOptions[0] = MAP_PROP_KEY;
         CustomOptions[1] = GAME_MODE_PROP_KEY;
         CustomOptions[2] = ROUND_START_TIME;
+        CustomOptions[3] = RACE_NAME;
         float CurrentTime = (float)PhotonNetwork.Time;
+        string raceNumber = Random.Range(0f, 999f).ToString("000");
+        string raceName = "";
+        switch (gameType) {
+            case 0:
+                raceName = "Championship" + raceNumber;
+                break;
+            case 1:
+                raceName = "FreeRace" + raceNumber;
+                break;
+        }
+        
+        
         Debug.Log("Launcher: CurrentTime: " + CurrentTime);
         options.CustomRoomPropertiesForLobby = CustomOptions;
-        options.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { MAP_PROP_KEY, 1 }, { GAME_MODE_PROP_KEY, gameType }, { ROUND_START_TIME, CurrentTime} };
+        options.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { 
+          { MAP_PROP_KEY, 1 }, 
+          { GAME_MODE_PROP_KEY, gameType }, 
+          { ROUND_START_TIME, CurrentTime},
+          { RACE_NAME, raceName} 
+        };
         options.MaxPlayers = maxPlayersPerRoom;
         options.PublishUserId = true;
         PhotonNetwork.CreateRoom(null, options, null);

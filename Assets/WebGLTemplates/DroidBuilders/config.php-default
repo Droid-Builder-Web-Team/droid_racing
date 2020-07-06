@@ -1,0 +1,9 @@
+<?
+
+// Database connection details, edit with the correct information
+$database_host = "localhost";
+$database_name = "name";
+$database_user = "";
+$database_pass = "";
+
+?>

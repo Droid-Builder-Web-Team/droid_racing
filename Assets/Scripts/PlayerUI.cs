@@ -13,23 +13,23 @@ namespace uk.droidbuilders.droid_racing
 
         [Tooltip("UI Text to display Player's Name")]
         [SerializeField]
-        private Text playerNameText;
+        public Text playerNameText;
         
         [Tooltip("UI Text to display Lap Number")]
         [SerializeField]
-        private Text lapNumberText;
+        public Text lapNumberText;
         
         [Tooltip("UI Text to display Last Lap Time")]
         [SerializeField]
-        private Text lastLapTimeText;
+        public Text lastLapTimeText;
         
         [Tooltip("UI Text to display Best Lap Time")]
         [SerializeField]
-        private Text bestLapTimeText;
+        public Text bestLapTimeText;
         
         [Tooltip("UI Text to display current elapsed Time")]
         [SerializeField]
-        private Text elapsedTimeText;
+        public Text elapsedTimeText;
         
         public Text isMaster;
         

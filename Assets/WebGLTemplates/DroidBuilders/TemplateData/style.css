@@ -23,14 +23,85 @@ body { 	padding: 0;
 #unity-footer { position: relative }
 .unity-mobile #unity-footer { display: none }
 #unity-webgl-logo { float:left; width: 204px; height: 38px; background: url('webgl-logo.png') no-repeat center }
-#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px; color: grey }
+#unity-build-title { float: right; 
+	margin-right: 10px; 
+	line-height: 38px; 
+	font-family: arial; 
+	font-size: 28px; 
+	color: grey
+ }
 #unity-fullscreen-button { float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center }
 #unity-mobile-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
-#social-links { width: 105px; height:25; left:50% }
+
+a:link {
+	color: grey;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+a:visited {
+	color: grey;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.top-card {
+	color: black;
+	font-size: 34px;
+	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.top-card-name {
+	background-color: white;
+	border-radius: 15px;
+	height: 50px;
+	padding-left: 10px;
+}
+
+.top-class-stats {
+	color: black;
+	margin: 20px;
+	padding: 10px;
+	display: table;
+	width: 90%;
+	table-layout: fixed;
+	border-spacing: 10px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.top-class-stat {
+	background-color: white;
+	border-radius: 15px;
+	height: 150px;
+	width: 200px;
+	display: table-cell;
+	padding: 15px;
+	margin: auto;
+}
+
+a.leaderboard:visited {
+	color: black;
+}
+
+a.leaderboard:link {
+	color: black;
+}
 
 .fa {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal 18px/1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -53,4 +124,50 @@ body { 	padding: 0;
   content: "\f167";
 }
 
+table {
+	margin: 2px;
+  padding: 2px;
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 97%;
+	background: grey;
+}
 
+table tr,td,th{
+  border: 1px solid black;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 350px 1fr 1fr 1fr;
+  grid-template-rows: 300px auto 40px;
+  gap: 1px 1px;
+  grid-template-areas: "Logo Top-Racers Top-Racers Top-Racers" "Fastest-Laps Fastest-Laps Championship Championship" "Footer Footer Footer Footer";
+}
+
+.Fastest-Laps { grid-area: Fastest-Laps; 
+	margin-left: auto;
+	margin-right: auto;
+	width: 95%;
+}
+
+.Championship { grid-area: Championship;
+	margin-left: auto;
+	margin-right: auto;
+	width: 95%;	
+}
+
+.Logo { grid-area: Logo; 
+	padding: 5px;
+}
+
+.Footer { grid-area: Footer; 
+	color: grey;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.Top-Racers { grid-area: Top-Racers; 
+	
+}
