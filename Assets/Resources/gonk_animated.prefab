@@ -797,7 +797,7 @@ MonoBehaviour:
   curWaypoint: 0
   speed: 4
   stop_distance: 2
-  PauseTimer: 2
+  PauseTimer: 1
   curTimer: 0
 --- !u!114 &-7135366061952781448
 MonoBehaviour:

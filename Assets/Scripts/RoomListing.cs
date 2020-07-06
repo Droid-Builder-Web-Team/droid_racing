@@ -9,10 +9,11 @@ public class RoomListing : MonoBehaviour
 {
   
     [SerializeField]
-    public Text _text;
+    public Text _roomName;
     public Text _max;
     public Text _current;
     public Image _type;
+    public Text _raceName;
     
     public RoomInfo RoomInfo { get; private set; }
     
@@ -22,13 +23,15 @@ public class RoomListing : MonoBehaviour
     public const string MAP_PROP_KEY = "map";
     public const string GAME_MODE_PROP_KEY = "gm";   
     public const string ROUND_START_TIME = "StartTime";
+    public const string RACE_NAME = "rn";
     
     public void SetRoomInfo(RoomInfo roomInfo)
     {
         RoomInfo = roomInfo;
-        _text.text = roomInfo.Name;
+        _raceName.text = roomInfo.CustomProperties[RACE_NAME].ToString();
         _max.text = roomInfo.MaxPlayers.ToString();
         _current.text = roomInfo.PlayerCount.ToString();
+        _roomName.text = roomInfo.Name;
         if ((int)roomInfo.CustomProperties[GAME_MODE_PROP_KEY] == 1)
         {
             Debug.Log("RoomListing: SetRoomInfo - game type = free race" + freeSprite);
@@ -41,10 +44,10 @@ public class RoomListing : MonoBehaviour
         }
     }
 
-    public void JoinSelectedRoom(Text text) 
+    public void JoinSelectedRoom(Text roomName) 
     {
-        Debug.Log("Joining Room: " + text.text);
-        PhotonNetwork.JoinRoom(text.text);
+        Debug.Log("Joining Room: " + roomName.text);
+        PhotonNetwork.JoinRoom(roomName.text);
     }
 
 }
