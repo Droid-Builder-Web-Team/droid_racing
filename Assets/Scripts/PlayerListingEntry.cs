@@ -11,6 +11,7 @@ public class PlayerListingEntry : MonoBehaviourPunCallbacks
     [SerializeField]
     public Text _name;
     public Text _laps;
+    public Image _color;
     //public Text _current;
     
     public Player PlayerInfo { get; private set; }
@@ -19,6 +20,12 @@ public class PlayerListingEntry : MonoBehaviourPunCallbacks
     {
         PlayerInfo = playerInfo;
         _name.text = playerInfo.NickName;
+        Color color = new Color(
+                (float)playerInfo.CustomProperties["rValue"],
+                (float)playerInfo.CustomProperties["gValue"],
+                (float)playerInfo.CustomProperties["bValue"]
+            );
+        _color.color = color;
     }
     
     public override void OnPlayerPropertiesUpdate(Player target, ExitGames.Client.Photon.Hashtable changedProps)

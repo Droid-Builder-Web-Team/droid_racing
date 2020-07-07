@@ -48,7 +48,20 @@ public class PlayerMove : MonoBehaviourPun
         if (photonView.IsMine) {
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
             
-            color = Random.ColorHSV();
+            
+            Color randomcolor = Random.ColorHSV();
+            color = new Color(
+                PlayerPrefs.GetFloat("rValue", randomcolor.r),
+                PlayerPrefs.GetFloat("gValue", randomcolor.g),
+                PlayerPrefs.GetFloat("bValue", randomcolor.b)
+            );
+          
+                
+            ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();     
+            hashtable.Add("rValue", color.r);
+            hashtable.Add("gValue", color.g);
+            hashtable.Add("bValue", color.b);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
             this.photonView.RPC("RPC_SendColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b));
             
             if (_cameraWork != null)
@@ -83,7 +96,11 @@ public class PlayerMove : MonoBehaviourPun
       if (photonView.IsMine) 
       {
         if (characterController.isGrounded) {
-          
+                          ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+                hashtable.Add("laps", laps);
+                hashtable.Add("best", bestTime);
+                hashtable.Add("last", lastTime);
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
             if ((Input.GetAxis("Vertical") < 0) && (currentSpeed > -topSpeed)) 
             {
                 currentSpeed = currentSpeed + (Input.GetAxis("Vertical")*(acceleration * Time.deltaTime)); 
