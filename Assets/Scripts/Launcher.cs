@@ -114,7 +114,7 @@ namespace uk.droidbuilders.droid_racing
             }
             else
             {
-                // #Critical, we must first and foremost connect to Photon Online Server.
+                // #Critical, we must first and foremost connec"_Color"t to Photon Online Server.
                 isConnecting = PhotonNetwork.ConnectUsingSettings();
                 PhotonNetwork.GameVersion = gameVersion;
             }
@@ -123,7 +123,7 @@ namespace uk.droidbuilders.droid_racing
 
 
     public void CreateNewRoom(int gameType) {
-        Debug.Log("Launcher: CreateRoom() called");
+        Debug.Log("Launcher: CreateRoom() called with gameType of " + gameType);
         RoomOptions options = new RoomOptions();
         string[] CustomOptions = new string[4];
         CustomOptions[0] = MAP_PROP_KEY;

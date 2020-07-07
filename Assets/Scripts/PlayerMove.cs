@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviourPun
     public float lastTime;
     public float bestTime;
     private bool hasStarted = false;
+    public Color color;
     
     private static int numCheckpoints = 4; 
     public bool[] checkPoints = new bool[numCheckpoints];
@@ -46,7 +47,10 @@ public class PlayerMove : MonoBehaviourPun
         Debug.Log("PlayerMove: Webcalls Object: {0}" + webCalls);
         if (photonView.IsMine) {
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
-        
+            
+            color = Random.ColorHSV();
+            this.photonView.RPC("RPC_SendColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b));
+            
             if (_cameraWork != null)
             {
                 Debug.Log("PlayerMove: Setting CameraWork to Follow");
@@ -223,6 +227,14 @@ public class PlayerMove : MonoBehaviourPun
             }
         }
         Debug.Log("PlayerMove: Laps - " + laps + " Best - " + bestTime + " Last - " + lastTime);
+    }
+    
+    [PunRPC]
+    private void RPC_SendColor(Vector3 randomColor)
+    {
+        Debug.Log("PlayerMove: RPC_SendColor called");
+        Color color = new Color(randomColor.x, randomColor.y, randomColor.z);
+        gameObject.GetComponentInChildren<Renderer>().material.SetColor("_Color", color);
     }
 
 }

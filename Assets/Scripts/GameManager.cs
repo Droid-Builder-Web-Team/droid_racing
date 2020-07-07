@@ -44,17 +44,6 @@ namespace uk.droidbuilders.droid_racing
           new Vector3(0f,1f,4f)
         };
         
-        private string[] colours = new [] {
-          "Red",
-          "Blue",
-          "Yellow",
-          "Green",
-          "Pink",
-          "Purple",
-          "Orange",
-          "Grey"
-        };
-        
         public float stateTime;
         private string gameState = "prerace";
         private bool resultsDrawn;
@@ -64,6 +53,7 @@ namespace uk.droidbuilders.droid_racing
         public const string MAP_PROP_KEY = "map";
         public const string GAME_MODE_PROP_KEY = "gm";   
         public const string ROUND_START_TIME = "StartTime";
+        public const string RACE_NAME = "rn";
 
         #region Photon Callbacks
 
@@ -125,12 +115,10 @@ namespace uk.droidbuilders.droid_racing
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     int x = PhotonNetwork.PlayerList.Length;
                     myPlayer = (GameObject)PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[x], Quaternion.identity, 0);
-                    Material newMat = Resources.Load("eggMat" + colours[x], typeof(Material)) as Material;
-                    Debug.Log("GameManager: Material loaded: " + newMat);
+                    //Material newMat = Resources.Load("eggMat" + colours[x], typeof(Material)) as Material;
+                    //Debug.Log("GameManager: Material loaded: " + newMat);
                     //
                     myPlayer.GetComponent<CameraWork>().enabled = true;
-                    GameObject mesh = myPlayer.transform.Find("egg-simple").gameObject.transform.Find("egg").gameObject;
-                    mesh.GetComponent<Renderer>().material = newMat;
                 }
                 else
                 {
@@ -151,8 +139,10 @@ namespace uk.droidbuilders.droid_racing
                 Debug.Log("GameManager: startTime got from custom properties is: " + stateTime);
             }
             
+            Debug.Log("GameManager: Game Mode is set to: " + PhotonNetwork.CurrentRoom.CustomProperties[GAME_MODE_PROP_KEY]);
             if ((int)PhotonNetwork.CurrentRoom.CustomProperties[GAME_MODE_PROP_KEY] == 1) 
             {
+                Debug.Log("GameManager: Freerace selected");
                 gameState = "freerace";
                 infoBox.gameObject.SetActive(false);
                 myPlayer.GetComponent<CharacterController>().enabled = true; 
@@ -191,7 +181,7 @@ namespace uk.droidbuilders.droid_racing
         
         void PreRace() 
         {
-            Debug.Log("GameManager: Pre-Race");
+            Debug.Log("GameManager: State - Pre-Race");
             infoBox.gameObject.SetActive(true);
             resultsBox.gameObject.SetActive(false);
             timeLeftBox.transform.parent.gameObject.SetActive(false);
@@ -213,7 +203,7 @@ namespace uk.droidbuilders.droid_racing
         
         void Starting()
         {
-            Debug.Log("GameManager: Starting");
+            Debug.Log("GameManager: State - Starting");
             float countdown = startDelay - ((float)PhotonNetwork.Time - stateTime);
             if (countdown > 0)
             {
@@ -232,7 +222,7 @@ namespace uk.droidbuilders.droid_racing
         
         void Racing()
         {
-            Debug.Log("GameManager: Racing");
+            Debug.Log("GameManager: State - Racing");
             float duration = (float)PhotonNetwork.Time - stateTime;
             timeLeftBox.text = (raceLength - duration).ToString("0") + "s";
             if (duration >  raceLength)
@@ -251,7 +241,7 @@ namespace uk.droidbuilders.droid_racing
         
         void EndRace()
         {
-            Debug.Log("GameManager: EndRace");
+            Debug.Log("GameManager: State - EndRace");
             if (!resultsDrawn) 
             {
                 DrawResults();
@@ -265,7 +255,7 @@ namespace uk.droidbuilders.droid_racing
         
         void FreeRace()
         {
-
+            Debug.Log("GameManager: State - FreeRace");
         }
         
         void Quit()
@@ -315,6 +305,7 @@ namespace uk.droidbuilders.droid_racing
             Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
             PhotonNetwork.LoadLevel("MainScene");
         } 
+        
         
         #endregion
     }
