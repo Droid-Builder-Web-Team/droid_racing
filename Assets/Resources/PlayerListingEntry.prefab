@@ -228,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: {fileID: 2504885389688811859}
   _laps: {fileID: 1977996907912763067}
+  _color: {fileID: 9065174605297756781}
 --- !u!1 &9013028620919320118
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,13 +55,8 @@ public class PlayerMove : MonoBehaviourPun
                 PlayerPrefs.GetFloat("gValue", randomcolor.g),
                 PlayerPrefs.GetFloat("bValue", randomcolor.b)
             );
-          
-                
-            ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();     
-            hashtable.Add("rValue", color.r);
-            hashtable.Add("gValue", color.g);
-            hashtable.Add("bValue", color.b);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+            
+            
             this.photonView.RPC("RPC_SendColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b));
             
             if (_cameraWork != null)
@@ -96,11 +91,7 @@ public class PlayerMove : MonoBehaviourPun
       if (photonView.IsMine) 
       {
         if (characterController.isGrounded) {
-                          ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
-                hashtable.Add("laps", laps);
-                hashtable.Add("best", bestTime);
-                hashtable.Add("last", lastTime);
-                PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+
             if ((Input.GetAxis("Vertical") < 0) && (currentSpeed > -topSpeed)) 
             {
                 currentSpeed = currentSpeed + (Input.GetAxis("Vertical")*(acceleration * Time.deltaTime)); 
@@ -247,11 +238,18 @@ public class PlayerMove : MonoBehaviourPun
     }
     
     [PunRPC]
-    private void RPC_SendColor(Vector3 randomColor)
+    private void RPC_SendColor(Vector3 color)
     {
         Debug.Log("PlayerMove: RPC_SendColor called");
-        Color color = new Color(randomColor.x, randomColor.y, randomColor.z);
-        gameObject.GetComponentInChildren<Renderer>().material.SetColor("_Color", color);
+        /*ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();     
+        hashtable.Add("rValue", color.x);
+        hashtable.Add("gValue", color.y);
+        hashtable.Add("bValue", color.z);
+        //hashtable.Add("test", 5);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+        */
+        Color playercolor = new Color(color.x, color.y, color.z);
+        gameObject.GetComponentInChildren<Renderer>().material.SetColor("_Color", playercolor);
     }
 
 }

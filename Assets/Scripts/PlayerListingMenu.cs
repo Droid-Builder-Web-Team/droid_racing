@@ -27,13 +27,15 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player player)
     {
         Debug.Log("PlayerListingMenu: OnPlayerLeftRoom()");
-        Debug.Log("PlayerListingMenu: _listing._name " + _listings[0]._name.ToString());
-        int index = _listings.FindIndex(x => x._name.ToString() == player.NickName);              
+        Debug.Log("PlayerListingMenu: _listing._name " + _listings[0]._name.text.ToString());
+        int index = _listings.FindIndex(x => x._name.text.ToString() == player.NickName);              
         if (index != -1) 
         {
             Debug.Log("PlayerListingMenu: index for removal: " + index);
             Destroy(_listings[index].gameObject);
             _listings.RemoveAt(index);
+        } else {
+            Debug.Log("PlayerListingMenu: invalid index");
         }
     }
     

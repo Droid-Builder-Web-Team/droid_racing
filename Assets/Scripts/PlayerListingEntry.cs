@@ -20,12 +20,7 @@ public class PlayerListingEntry : MonoBehaviourPunCallbacks
     {
         PlayerInfo = playerInfo;
         _name.text = playerInfo.NickName;
-        Color color = new Color(
-                (float)playerInfo.CustomProperties["rValue"],
-                (float)playerInfo.CustomProperties["gValue"],
-                (float)playerInfo.CustomProperties["bValue"]
-            );
-        _color.color = color;
+
     }
     
     public override void OnPlayerPropertiesUpdate(Player target, ExitGames.Client.Photon.Hashtable changedProps)
@@ -34,7 +29,16 @@ public class PlayerListingEntry : MonoBehaviourPunCallbacks
         if (PlayerInfo.NickName == target.NickName) 
         {
             this._laps.text = target.CustomProperties["laps"].ToString();
+          
+            /*Color color = new Color(
+                (float)target.CustomProperties["rValue"],
+                (float)target.CustomProperties["gValue"],
+                (float)target.CustomProperties["bValue"]
+            );
+            this._color.color = color;
+            */
         }
+        Debug.Log("PlayerListingEntry: OnPlayerPropertiesUpdate finished");
     }
 
 

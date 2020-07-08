@@ -181,7 +181,7 @@ namespace uk.droidbuilders.droid_racing
         
         void PreRace() 
         {
-            Debug.Log("GameManager: State - Pre-Race");
+            //Debug.Log("GameManager: State - Pre-Race");
             infoBox.gameObject.SetActive(true);
             resultsBox.gameObject.SetActive(false);
             timeLeftBox.transform.parent.gameObject.SetActive(false);
@@ -203,7 +203,7 @@ namespace uk.droidbuilders.droid_racing
         
         void Starting()
         {
-            Debug.Log("GameManager: State - Starting");
+            //Debug.Log("GameManager: State - Starting");
             float countdown = startDelay - ((float)PhotonNetwork.Time - stateTime);
             if (countdown > 0)
             {
@@ -222,7 +222,7 @@ namespace uk.droidbuilders.droid_racing
         
         void Racing()
         {
-            Debug.Log("GameManager: State - Racing");
+            //Debug.Log("GameManager: State - Racing");
             float duration = (float)PhotonNetwork.Time - stateTime;
             timeLeftBox.text = (raceLength - duration).ToString("0") + "s";
             if (duration >  raceLength)
@@ -241,7 +241,7 @@ namespace uk.droidbuilders.droid_racing
         
         void EndRace()
         {
-            Debug.Log("GameManager: State - EndRace");
+            //Debug.Log("GameManager: State - EndRace");
             if (!resultsDrawn) 
             {
                 DrawResults();
@@ -255,7 +255,7 @@ namespace uk.droidbuilders.droid_racing
         
         void FreeRace()
         {
-            Debug.Log("GameManager: State - FreeRace");
+            //Debug.Log("GameManager: State - FreeRace");
         }
         
         void Quit()
