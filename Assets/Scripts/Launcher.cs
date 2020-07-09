@@ -156,11 +156,6 @@ namespace uk.droidbuilders.droid_racing
         PhotonNetwork.CreateRoom(null, options, null);
     }
     
-    public void Offline()
-    {
-        SceneManager.LoadScene("Offline");
-    }
-    
 
     #endregion
 

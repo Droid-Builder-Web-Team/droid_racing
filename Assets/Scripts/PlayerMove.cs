@@ -56,6 +56,9 @@ public class PlayerMove : MonoBehaviourPun
                 PlayerPrefs.GetFloat("bValue", randomcolor.b)
             );
             
+            PlayerPrefs.SetFloat("rValue", color.r);
+            PlayerPrefs.SetFloat("gValue", color.g);
+            PlayerPrefs.SetFloat("bValue", color.b);
             
             this.photonView.RPC("RPC_SendColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b));
             

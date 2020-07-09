@@ -95,6 +95,7 @@ namespace uk.droidbuilders.droid_racing
         {
             Debug.Log("GameManager: OnLeftRoom");
             SceneManager.LoadScene(0);
+            PhotonNetwork.JoinLobby();
         }
 
 
