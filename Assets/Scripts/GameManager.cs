@@ -120,6 +120,7 @@ namespace uk.droidbuilders.droid_racing
                     //Debug.Log("GameManager: Material loaded: " + newMat);
                     //
                     myPlayer.GetComponent<CameraWork>().enabled = true;
+                    myPlayer.GetComponent<AudioListener>().enabled = true;
                 }
                 else
                 {

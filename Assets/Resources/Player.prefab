@@ -142,7 +142,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7305293779191547474}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!64 &3305368204347697254
 MeshCollider:
   m_ObjectHideFlags: 0

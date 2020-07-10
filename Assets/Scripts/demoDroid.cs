@@ -42,7 +42,6 @@ public class demoDroid : MonoBehaviour
     
     public void SetColorRed(float value)
     {
-        Debug.Log("demoDroid: SetColorRed called with value of " + value);
         Color currentColor = mat.GetColor("_Color");
         
         currentColor.r = value; 
@@ -52,7 +51,6 @@ public class demoDroid : MonoBehaviour
     
     public void SetColorGreen(float value)
     {
-        Debug.Log("demoDroid: SetColorRed called with value of " + value);
         Color currentColor = mat.GetColor("_Color");
         
         currentColor.g = value; 
@@ -62,7 +60,6 @@ public class demoDroid : MonoBehaviour
     
     public void SetColorBlue(float value)
     {
-        Debug.Log("demoDroid: SetColorRed called with value of " + value);
         Color currentColor = mat.GetColor("_Color");
         
         currentColor.b = value; 
