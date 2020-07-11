@@ -2287,13 +2287,13 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Welcome to the online 39.1% Racing Season.\n\nYour droid is controlledwith
-    either the WASD keys, or the arrow keys. If there is no race listed on the right,
-    or if you want to create your own, click on Create Race. Otherwise, click on
-    any ongoing race in the list.\n\nThere are two types of race:\n\n     Free Race
-    - No time limit, just see how fast a lap you can do. Players can come and go
-    as they please.\n\n     Championship - See how many laps you can do in a set
-    time. This mode waits for the room to fill, or for the timer to run out before
-    starting. Once started, noone else can join the race."
+    either the WASD keys, or the arrow keys, and 'M' to mute. If there is no race
+    listed on the right, or if you want to create your own, click on Create Race.
+    Otherwise, click on any ongoing race in the list.\n\nThere are two types of race:\n\n    
+    Free Race - No time limit, just see how fast a lap you can do. Players can come
+    and go as they please.\n\n     Championship - See how many laps you can do in
+    a set time. This mode waits for the room to fill, or for the timer to run out
+    before starting. Once started, noone else can join the race."
 --- !u!222 &1492730475
 CanvasRenderer:
   m_ObjectHideFlags: 0

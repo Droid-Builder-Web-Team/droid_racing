@@ -111,6 +111,10 @@ public class PlayerMove : MonoBehaviourPun
                     currentSpeed = 0;
             }
         }
+        if (Input.GetKeyDown(KeyCode.M)) 
+        {
+            toggleSound();
+        }
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         //moveDirection.y -= gravity * Time.deltaTime;
         // Move the controller
@@ -246,6 +250,18 @@ public class PlayerMove : MonoBehaviourPun
         Debug.Log("PlayerMove: RPC_SendColor called");
         Color playercolor = new Color(color.x, color.y, color.z);
         gameObject.GetComponentInChildren<Renderer>().material.SetColor("_Color", playercolor);
+    }
+    
+    public void toggleSound() {
+        AudioListener _listener = gameObject.GetComponent<AudioListener>();
+        if (_listener.enabled) 
+        {
+            _listener.enabled = false;
+        }
+        else
+        {
+            _listener.enabled = true;
+        }
     }
 
 }
