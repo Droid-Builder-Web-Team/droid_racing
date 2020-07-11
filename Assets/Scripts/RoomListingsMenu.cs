@@ -32,12 +32,15 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
           {
               Debug.Log("Room added: " + info.Name);
               if (index != -1) {
+                  Debug.Log("Updating existing room");
                   _listings[index].SetRoomInfo(info);
               }
               else 
               {
+                  Debug.Log("Adding new room!");
                   RoomListing listing = Instantiate(_roomListing, _content);
                       if (listing != null)
+                          Debug.Log("Added new room!");
                           listing.SetRoomInfo(info);
                           _listings.Add(listing);
               }

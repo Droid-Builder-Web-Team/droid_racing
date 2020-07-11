@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class demoDroid : MonoBehaviour
 {
   
-    //public int speedOfRotation = 5;
-    private float curveAmount = 0.0f;
-    private float rotateSpeed = 100.0f;
+    public float speedOfRotation = 0.5f;
     
     public Slider red;
     public Slider blue;
@@ -36,7 +34,7 @@ public class demoDroid : MonoBehaviour
     // Update is called once per frame
     void Update() {
 
-        this.transform.Rotate(0,0.5f,0);
+        this.transform.Rotate(0,speedOfRotation,0);
 
     }
     

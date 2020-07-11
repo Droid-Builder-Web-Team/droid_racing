@@ -64,6 +64,6 @@ public class GonkWander : MonoBehaviour
     void OnTriggerEnter(Collider other)  //Plays Sound Whenever collision detected
     {
         Debug.Log("GonkWander: Someone just hit me!");
-        GetComponent<AudioSource> ().Play ();
+        GetComponent<AudioSource>().Play();
     }
 }

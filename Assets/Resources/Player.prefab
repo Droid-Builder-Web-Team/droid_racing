@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 5931033494971972021}
-  acceleration: 15
+  acceleration: 10
   topSpeed: 30
-  turnSpeed: 3
+  turnSpeed: 250
   dragFactor: 60
   currentSpeed: 0
   laps: 0
@@ -80,7 +80,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!114 &8018434337336022856
 MonoBehaviour:
   m_ObjectHideFlags: 0

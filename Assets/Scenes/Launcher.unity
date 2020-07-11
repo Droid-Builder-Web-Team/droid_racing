@@ -3655,6 +3655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7803ecb6ff89469ac95660137e0206dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedOfRotation: 0.5
   red: {fileID: 647675145}
   blue: {fileID: 1849692582}
   green: {fileID: 1213583873}

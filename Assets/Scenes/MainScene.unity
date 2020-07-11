@@ -136,11 +136,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 62.82
+      value: 61.948
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 0.788
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -286,6 +286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackCurveSmall (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
       value: 57.431026
@@ -347,6 +351,10 @@ PrefabInstance:
     - target: {fileID: 397754956270080315, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_Name
       value: TrackCurveSmall (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
@@ -639,6 +647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackCurveSmall
       objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.2601414
@@ -749,6 +761,10 @@ PrefabInstance:
     - target: {fileID: 7267178570433466096, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
       propertyPath: m_Name
       value: TrackStraightShort (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
@@ -907,6 +923,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackStraightShort (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
 --- !u!4 &244417669 stripped
@@ -968,6 +988,10 @@ PrefabInstance:
     - target: {fileID: 7267178570433466096, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
       propertyPath: m_Name
       value: TrackStraightShort (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
@@ -1088,6 +1112,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackStraightShort (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
 --- !u!4 &285397316 stripped
@@ -1207,6 +1235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackStraightShort (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
 --- !u!4 &286501472 stripped
@@ -1257,11 +1289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 51.96
+      value: 52.976
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1316,6 +1348,10 @@ PrefabInstance:
     - target: {fileID: 397754956270080315, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_Name
       value: TrackCurveSmall (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1378,6 +1414,10 @@ PrefabInstance:
     - target: {fileID: 397754956270080315, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_Name
       value: TrackCurveSmall (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1709,6 +1749,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackStraightShort (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
 --- !u!4 &432781745 stripped
@@ -1775,6 +1819,10 @@ PrefabInstance:
     - target: {fileID: 7267178570433466096, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
       propertyPath: m_Name
       value: TrackStraightShort (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
@@ -2544,6 +2592,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackStraightShort (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
 --- !u!4 &785731912 stripped
@@ -2932,6 +2984,10 @@ PrefabInstance:
     - target: {fileID: 7267178570433466096, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
       propertyPath: m_Name
       value: TrackStraightShort (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
@@ -3456,6 +3512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackCurveSmall (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.62139
@@ -3520,11 +3580,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 62.61
+      value: 61.973
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 0.807
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3906,6 +3966,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackCurveSmall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
       value: 47.540142
@@ -4082,6 +4146,10 @@ PrefabInstance:
     - target: {fileID: 7267178570433466096, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
       propertyPath: m_Name
       value: TrackStraightShort (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
@@ -4449,6 +4517,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackStraightShort (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
 --- !u!4 &1395793958 stripped
@@ -4466,6 +4538,10 @@ PrefabInstance:
     - target: {fileID: 397754956270080315, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_Name
       value: TrackCurveSmall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4838,11 +4914,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 52.15
+      value: 52.966
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 0.743
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5109,6 +5185,10 @@ PrefabInstance:
     - target: {fileID: 7267178570433466096, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
       propertyPath: m_Name
       value: TrackStraightShort
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
@@ -5459,6 +5539,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackStraightShort (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
 --- !u!4 &1741399719 stripped
@@ -5520,6 +5604,10 @@ PrefabInstance:
     - target: {fileID: 7267178570433466096, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
       propertyPath: m_Name
       value: TrackStraightShort (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
@@ -5659,6 +5747,10 @@ PrefabInstance:
     - target: {fileID: 7267178570433466096, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
       propertyPath: m_Name
       value: TrackStraightShort (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
@@ -5862,6 +5954,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackCurveSmall (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.588509
@@ -6025,6 +6121,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackCurveSmall (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.586836
@@ -6086,6 +6186,10 @@ PrefabInstance:
     - target: {fileID: 397754956270080315, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_Name
       value: TrackCurveSmall (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6393,6 +6497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackStraightShort (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 7267178570433466100, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9b18b5e2bf23940b0adbbbbd09655f, type: 3}
 --- !u!4 &2010028513 stripped
@@ -6471,6 +6579,10 @@ PrefabInstance:
     - target: {fileID: 397754956270080315, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_Name
       value: TrackCurveSmall (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 397754956270080319, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 397754956270439707, guid: f1a85f852a83aad4d9ceccf7929b3513, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6593,11 +6705,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 52.54
+      value: 53.07
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 0.82
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6767,11 +6879,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 62.71
+      value: 61.864
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 0.985
       objectReference: {fileID: 0}
     - target: {fileID: 6963305380323006918, guid: e73ce5a6b1f065dbb9aea60a5ada34ab, type: 3}
       propertyPath: m_LocalPosition.z

@@ -114,7 +114,7 @@ public class PlayerMove : MonoBehaviourPun
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         //moveDirection.y -= gravity * Time.deltaTime;
         // Move the controller
-        transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed, 0);
+        transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
         characterController.SimpleMove(forward * currentSpeed);
         if (hasStarted)
         {
@@ -244,13 +244,6 @@ public class PlayerMove : MonoBehaviourPun
     private void RPC_SendColor(Vector3 color)
     {
         Debug.Log("PlayerMove: RPC_SendColor called");
-        /*ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();     
-        hashtable.Add("rValue", color.x);
-        hashtable.Add("gValue", color.y);
-        hashtable.Add("bValue", color.z);
-        //hashtable.Add("test", 5);
-        PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
-        */
         Color playercolor = new Color(color.x, color.y, color.z);
         gameObject.GetComponentInChildren<Renderer>().material.SetColor("_Color", playercolor);
     }
