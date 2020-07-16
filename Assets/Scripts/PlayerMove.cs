@@ -48,6 +48,9 @@ public class PlayerMove : MonoBehaviourPun
         if (photonView.IsMine) {
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
             
+            ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+            hashtable.Add("email", PlayerPrefs.GetString("PlayerEmail"));
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
             
             Color randomcolor = Random.ColorHSV();
             color = new Color(
@@ -228,7 +231,7 @@ public class PlayerMove : MonoBehaviourPun
                 for(int i = 0; i < numCheckpoints; i++)
                     checkPoints[i] = false;
                 lapStart = true;
-                StartCoroutine(webCalls.UploadLap("email", PhotonNetwork.NickName, lastTime, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name));
+                StartCoroutine(webCalls.UploadLap(PlayerPrefs.GetString("PlayerEmail"), PhotonNetwork.NickName, lastTime, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name));
                 ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
                 hashtable.Add("laps", laps);
                 hashtable.Add("best", bestTime);

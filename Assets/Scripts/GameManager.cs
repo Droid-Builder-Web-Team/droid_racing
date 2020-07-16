@@ -21,6 +21,8 @@ namespace uk.droidbuilders.droid_racing
         public GameObject playerList;
         public Canvas resultsBox;
         public Text timeLeftBox;
+        public AudioClip start01;
+        public AudioClip start02;
         
         [SerializeField]
         public ResultsListingEntry _resultListing;
@@ -49,6 +51,7 @@ namespace uk.droidbuilders.droid_racing
         private bool resultsDrawn;
         private GameObject myPlayer;                
         private WebCalls webCalls;
+        private AudioSource finishLine;
         
         public const string MAP_PROP_KEY = "map";
         public const string GAME_MODE_PROP_KEY = "gm";   
@@ -103,6 +106,7 @@ namespace uk.droidbuilders.droid_racing
         {
             Instance = this;
             webCalls = (WebCalls)GameObject.Find("WebCalls").GetComponent(typeof(WebCalls));
+            finishLine = GameObject.FindWithTag("Finish").GetComponent<AudioSource>();
             PhotonNetwork.InstantiateSceneObject("gonk_animated", new Vector3(54f, 2f, 14f ), Quaternion.identity, 0);
             if (playerPrefab == null)
             {
@@ -197,6 +201,8 @@ namespace uk.droidbuilders.droid_racing
                 PhotonNetwork.CurrentRoom.IsVisible = false;
                 stateTime = (float)PhotonNetwork.Time;
                 gameState = "starting";
+                finishLine.clip = start01;
+                InvokeRepeating("CountdownBeep", 1f, 1f);
             }
         }
         
@@ -207,9 +213,13 @@ namespace uk.droidbuilders.droid_racing
             if (countdown > 0)
             {
                 infoText.text = "Game starting in: " + countdown.ToString("n0");
+                //finishLine.Play();
             } 
             else
             {
+                CancelInvoke("CountdownBeep");
+                finishLine.clip = start02;
+                finishLine.Play();
                 infoBox.gameObject.SetActive(false);
                 timeLeftBox.transform.parent.gameObject.SetActive(true);
                 myPlayer.GetComponent<CharacterController>().enabled = true;    // Enable throttle control!
@@ -222,6 +232,7 @@ namespace uk.droidbuilders.droid_racing
         void Racing()
         {
             //Debug.Log("GameManager: State - Racing");
+            CancelInvoke("CountdownBeep");
             float duration = (float)PhotonNetwork.Time - stateTime;
             timeLeftBox.text = (raceLength - duration).ToString("0") + "s";
             if (duration >  raceLength)
@@ -229,7 +240,7 @@ namespace uk.droidbuilders.droid_racing
                 Debug.Log("Race Finished");
                 myPlayer.GetComponent<CharacterController>().enabled = false;
                 Debug.Log("GameManager: Player laps: " + myPlayer.GetComponent<PlayerMove>().laps);
-                StartCoroutine(webCalls.UploadRace("email", PhotonNetwork.NickName, myPlayer.GetComponent<PlayerMove>().bestTime, 
+                StartCoroutine(webCalls.UploadRace(PlayerPrefs.GetString("PlayerEmail"), PhotonNetwork.NickName, myPlayer.GetComponent<PlayerMove>().bestTime, 
                             myPlayer.GetComponent<PlayerMove>().laps, PhotonNetwork.CurrentRoom.PlayerCount, PhotonNetwork.CurrentRoom.Name, raceLength));
                 timeLeftBox.transform.parent.gameObject.SetActive(false);
                 resultsBox.gameObject.SetActive(true);
@@ -304,6 +315,12 @@ namespace uk.droidbuilders.droid_racing
             Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
             PhotonNetwork.LoadLevel("MainScene");
         } 
+        
+        void CountdownBeep()
+        {
+            Debug.Log("Beep!");
+            finishLine.Play();
+        }
         
         
         #endregion
