@@ -6,12 +6,17 @@ ModelImporter:
   - first:
       74: -1483096645634704955
     second: Gonk|GonkWalk
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Default
+    second: {fileID: 838209324944826319, guid: c977bf0b77f04e0d7b0f8c6fea5d0c2e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 1
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

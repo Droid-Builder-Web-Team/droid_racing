@@ -48,9 +48,9 @@ public class PlayerMove : MonoBehaviourPun
         if (photonView.IsMine) {
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
             
-            ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
-            hashtable.Add("email", PlayerPrefs.GetString("PlayerEmail"));
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+            //ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+            //hashtable.Add("email", PlayerPrefs.GetString("PlayerEmail"));
+            //PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
             
             Color randomcolor = Random.ColorHSV();
             color = new Color(
