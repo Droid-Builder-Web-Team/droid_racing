@@ -6,4 +6,7 @@ $database_name = "name";
 $database_user = "";
 $database_pass = "";
 
+$perPage = 20;
+
+$racing_api = "";
 ?>

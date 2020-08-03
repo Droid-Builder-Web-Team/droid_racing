@@ -10,12 +10,8 @@ $type = $_REQUEST['type'];
 
 $json_string = json_encode($_REQUEST);
 
-$file_handle = fopen('debug.json', 'w');
-fwrite($file_handle, $json_string);
-fclose($file_handle);
-
 // Decode request
-if ($api == $config->racing_api) {
+if ($api == $racing_api) {
 	if ($type == "lap") {
       		$sql = "INSERT INTO racing_times(email, name, lap_time, participents, room_name) VALUES (?, ?, ?, ?, ?)";
       		$stmt = $conn->prepare($sql);
@@ -27,10 +23,13 @@ if ($api == $config->racing_api) {
       		$stmt->bind_param("ssdis", $email, $name, $time, $participents, $room_name);
 		$stmt->execute();
 		$stmt->close();
-	} 
+	}
 
 	if ($type == "race") {
-		$sql = "INSERT INTO racing_games(email, name, fastest_lap, number_laps, participents, room_name, race_length) VALUES(?, ?, ?, ?, ?, ?, ?)";
+		$avgsql = "SELECT avg(lap_time) as average FROM racing_times WHERE name = \"".$_REQUEST['name']."\" AND room_name LIKE \"".$_REQUEST['room_name']."%\";";
+  	$avg = $conn->query($avgsql)->fetch_object()->average;
+		$file_handle = fopen('average.txt', 'w');
+		$sql = "INSERT INTO racing_games(email, name, fastest_lap, number_laps, average_lap, participents, room_name, race_length) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt = $conn->prepare($sql);
 		$email = $_REQUEST['email'];
 		$name = $_REQUEST['name'];
@@ -39,7 +38,7 @@ if ($api == $config->racing_api) {
 		$fastest_time = $_REQUEST['fastest_time'];
 		$number_laps = $_REQUEST['number_laps'];
 		$race_length = $_REQUEST['race_length'];
-		$stmt->bind_param("ssdiisd", $email, $name, $fastest_time, $number_laps, $participents, $room_name, $race_length);
+		$stmt->bind_param("ssdidisd", $email, $name, $fastest_time, $number_laps, $avg, $participents, $room_name, $race_length);
 		$stmt->execute();
 		$stmt->close();
 
@@ -50,4 +49,3 @@ if ($api == $config->racing_api) {
 }
 
 ?>
-
