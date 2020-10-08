@@ -13,7 +13,7 @@ namespace PathCreation.Examples {
         [Header ("Material settings")]
         public Material roadMaterial;
         public Material undersideMaterial;
-        public float textureTiling = 1;
+        public float textureTiling = 75;
 
         [SerializeField, HideInInspector]
         GameObject meshHolder;
