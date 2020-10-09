@@ -6,8 +6,43 @@
     <title>Unity WebGL Player | {{{ PRODUCT_NAME }}}</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+
+    <script>
+    function startAudioOnClick(){
+
+      window.AudioContext = window.AudioContext || window.webkitAudioContext;
+      var bind = Function.bind;
+      var unbind = bind.bind(bind);
+
+      function instantiate(constructor, args) {
+        return new (unbind(constructor, null).apply(null, args));
+      }
+
+      window.AudioContext = function (AudioContext) {
+        return function () {
+          var audioContext = instantiate(AudioContext, arguments);
+          window.myAudioContext = audioContext;
+          console.log('AudioContext has been instantiated!');
+          return audioContext;
+        }
+      }(AudioContext);
+
+      var webAudioEnabled = false;
+
+      function resumeAudio(){
+        if (!webAudioEnabled && window.myAudioContext){
+          console.log('SIMMER starting Audio!');
+          window.myAudioContext.resume();
+          webAudioEnabled = true;
+        }
+      }
+
+      document.body.addEventListener('click', resumeAudio, true);
+      document.addEventListener('keydown', resumeAudio, true);
+    }
+    </script>
   </head>
-  <body>
+  <body onload="startAudioOnClick()">
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas"></canvas>
       <div id="unity-loading-bar">
@@ -96,6 +131,8 @@
         });
       };
       document.body.appendChild(script);
+
+
     </script>
   </body>
 </html>

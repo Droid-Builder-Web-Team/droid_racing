@@ -14,27 +14,27 @@ namespace uk.droidbuilders.droid_racing
         [Tooltip("UI Text to display Player's Name")]
         [SerializeField]
         public Text playerNameText;
-        
+
         [Tooltip("UI Text to display Lap Number")]
         [SerializeField]
         public Text lapNumberText;
-        
+
         [Tooltip("UI Text to display Last Lap Time")]
         [SerializeField]
         public Text lastLapTimeText;
-        
+
         [Tooltip("UI Text to display Best Lap Time")]
         [SerializeField]
         public Text bestLapTimeText;
-        
+
         [Tooltip("UI Text to display current elapsed Time")]
         [SerializeField]
         public Text elapsedTimeText;
-        
+
         public Text isMaster;
-        
+
         #endregion
-        
+
         #region Private Fields
 
         private PlayerMove target;
@@ -50,7 +50,7 @@ namespace uk.droidbuilders.droid_racing
 
         void Update()
         {
-          
+
             if (target == null)
             {
                 Destroy(this.gameObject);
@@ -61,34 +61,34 @@ namespace uk.droidbuilders.droid_racing
             {
                 lapNumberText.text = "" + target.laps;
             }
-            
+
             if (lastLapTimeText != null)
             {
                 lastLapTimeText.text = "Last Lap Time: " + target.lastTime.ToString("F2") + "s";
             }
-            
+
             if (bestLapTimeText != null)
             {
                 bestLapTimeText.text = "Best Lap Time: " + target.bestTime.ToString("F2") + "s";
             }
-            
+
             if (elapsedTimeText != null)
             {
                 elapsedTimeText.text = target.elapsedTime.ToString("F2") + "s";
             }
-            
-            if (PhotonNetwork.IsMasterClient) {
+
+            if (target.GetComponent<AudioListener>().enabled) {
                 isMaster.text = "Y";
             } else {
                 isMaster.text = "N";
             }
-            
-        } 
+
+        }
         #endregion
 
 
         #region Public Methods
-        
+
         public void SetTarget(PlayerMove _target)
         {
             Debug.Log("PlayerUI: SetTarget called: " + target);
@@ -103,11 +103,11 @@ namespace uk.droidbuilders.droid_racing
             {
                 playerNameText.text = target.photonView.Owner.NickName;
             }
-          }        
+          }
 
         #endregion
 
-        
+
 
     }
 }

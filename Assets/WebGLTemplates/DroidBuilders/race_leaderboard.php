@@ -48,7 +48,7 @@ if ($conn->connect_error) {
 $sqlQuery = "SELECT MAX(x.uid), x.name, x.lap_time, x.added FROM racing_times x
     JOIN (SELECT p.name, MIN(lap_time)
     AS lap_fastest FROM racing_times p GROUP BY p.name) y ON y.name = x.name
-    AND y.lap_fastest = x.lap_time GROUP BY x.name, x.lap_time ORDER BY x.lap_time";
+    AND y.lap_fastest = x.lap_time GROUP BY x.added, x.name, x.lap_time ORDER BY x.lap_time";
 $result = mysqli_query($conn, $sqlQuery);
 $totalRecords = mysqli_num_rows($result);
 $totalPagesFastest = ceil($totalRecords/$perPage);
