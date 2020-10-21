@@ -16,7 +16,7 @@ namespace uk.droidbuilders.droid_racing
         private byte maxPlayersPerRoom = 6;
 
         #endregion
-        
+
         #region Public Fields
         [Tooltip("The Ui Panel to let the user enter name, connect and play")]
         [SerializeField]
@@ -27,21 +27,20 @@ namespace uk.droidbuilders.droid_racing
         [Tooltip("Connecting text box")]
         [SerializeField]
         public GameObject connectingText;
-      
-        
+
+
         [Tooltip("The UI object to show rooms")]
         [SerializeField]
         public GameObject roomsPanel;
         #endregion
-        
+
         [Tooltip("Region to connect to (eu, or us)")]
         [SerializeField]
         private string _region;
-        
+
         #region Private Fields
-        
+
         public const string MAP_PROP_KEY = "map";
-        public const string GAME_MODE_PROP_KEY = "gm";   
         public const string ROUND_START_TIME = "StartTime";
         public const string RACE_NAME = "rn";
 
@@ -49,7 +48,7 @@ namespace uk.droidbuilders.droid_racing
         /// <summary>
         /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
         /// </summary>
-        string gameVersion = "1";
+        string gameVersion = "2";
         /// <summary>
         /// Keep track of the current process. Since connection is asynchronous and is based on several callbacks from Photon,
         /// we need to keep track of this to properly adjust the behavior when we receive call back by Photon.
@@ -100,11 +99,11 @@ namespace uk.droidbuilders.droid_racing
         public void Connect()
         {
             Debug.Log("Launcher: Connecting...");
-            
+
             lobbyPanel.SetActive(false);
             loginPanel.SetActive(false);
             connectingText.SetActive(true);
-            
+
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.IsConnected)
             {
@@ -122,40 +121,37 @@ namespace uk.droidbuilders.droid_racing
 
 
 
-    public void CreateNewRoom(int gameType) {
-        Debug.Log("Launcher: CreateRoom() called with gameType of " + gameType);
+    public void CreateNewRoom(int mapNumber) {
+        Debug.Log("Launcher: CreateRoom() called with map " + mapNumber);
         RoomOptions options = new RoomOptions();
-        string[] CustomOptions = new string[4];
+        string[] CustomOptions = new string[2];
         CustomOptions[0] = MAP_PROP_KEY;
-        CustomOptions[1] = GAME_MODE_PROP_KEY;
-        CustomOptions[2] = ROUND_START_TIME;
-        CustomOptions[3] = RACE_NAME;
-        float CurrentTime = (float)PhotonNetwork.Time;
+        CustomOptions[1] = RACE_NAME;
         string raceNumber = Random.Range(0f, 999f).ToString("000");
         string raceName = "";
-        switch (gameType) {
-            case 0:
-                raceName = "Championship" + raceNumber;
-                break;
+        switch (mapNumber) {
             case 1:
-                raceName = "FreeRace" + raceNumber;
+                raceName = "Halloween" + raceNumber;
+                break;
+            case 2:
+                raceName = "Practice" + raceNumber;
+                break;
+            default:
+                raceName = "ERROR" + raceNumber;
                 break;
         }
-        
-        
-        Debug.Log("Launcher: CurrentTime: " + CurrentTime);
+
         options.CustomRoomPropertiesForLobby = CustomOptions;
-        options.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { 
-          { MAP_PROP_KEY, 1 }, 
-          { GAME_MODE_PROP_KEY, gameType }, 
-          { ROUND_START_TIME, CurrentTime},
-          { RACE_NAME, raceName} 
+        options.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable {
+          { MAP_PROP_KEY, mapNumber },
+          { RACE_NAME, raceName}
         };
         options.MaxPlayers = maxPlayersPerRoom;
         options.PublishUserId = true;
+        Debug.Log("Launcher: Creating room");
         PhotonNetwork.CreateRoom(null, options, null);
     }
-    
+
 
     #endregion
 
@@ -170,7 +166,7 @@ namespace uk.droidbuilders.droid_racing
     {
       Debug.Log("Launcher: OnConnectedToMaster() was called by PUN");
       // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-      if (isConnecting) 
+      if (isConnecting)
       {
           Debug.Log("Launcher: Connecting to Lobby");
           PhotonNetwork.JoinLobby();
@@ -193,7 +189,7 @@ namespace uk.droidbuilders.droid_racing
     {
         Debug.Log("Launcher: OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
     }
-    
+
     public override void OnCreatedRoom()
     {
         Debug.Log("Room created");
@@ -202,7 +198,7 @@ namespace uk.droidbuilders.droid_racing
     public override void OnJoinedRoom()
     {
         Debug.Log("Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-        PhotonNetwork.LoadLevel("MainScene");
+        PhotonNetwork.LoadLevel("Map" + PhotonNetwork.CurrentRoom.CustomProperties[MAP_PROP_KEY]);
     }
     #endregion
     }

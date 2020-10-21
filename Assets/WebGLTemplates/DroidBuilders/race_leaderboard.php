@@ -67,6 +67,7 @@ $totalPagesChampionship = ceil($totalRecords/$perPage);
       <thead>
         <tr>
           <th>Run date</th>
+          <th>Course</th>
           <th>Position</th>
           <th>Contender</th>
           <th>Final Time</th>

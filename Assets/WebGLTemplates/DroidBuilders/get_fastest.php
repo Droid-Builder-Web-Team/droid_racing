@@ -16,7 +16,7 @@ if (isset($_POST['page'])) {
 	$page=1;
 };
 $startFrom = ($page-1) * $perPage;
-$sqlQuery = "SELECT MAX(x.uid), x.name, x.lap_time, x.added FROM racing_times x
+$sqlQuery = "SELECT MAX(x.uid), x.name, x.lap_time, x.added, x.course FROM racing_times x
     JOIN (SELECT p.name, MIN(lap_time)
     AS lap_fastest FROM racing_times p GROUP BY p.name) y ON y.name = x.name
     AND y.lap_fastest = x.lap_time GROUP BY x.added, x.name, x.lap_time ORDER BY x.lap_time
@@ -41,6 +41,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 	}
 	$paginationHtml.= ">";
   $paginationHtml.= "<td>".$row['added']."</td>";
+  $paginationHtml.= "<td>".$row['course']."</td>";
 	$paginationHtml.= "<td align=center>".$pos."</td>";
 	$paginationHtml.= "<td onclick=updateRacer(\"".str_replace(' ', '&nbsp;', $row['name'])."\")>".$row['name']."</a></td>";
   $paginationHtml.= "<td>".$row['lap_time']."s</td>";

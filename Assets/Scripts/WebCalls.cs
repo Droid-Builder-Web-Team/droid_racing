@@ -6,11 +6,11 @@ using UnityEngine.Networking;
 
 public class WebCalls : MonoBehaviour
 {
-  
+
     public string apiKey;
     public string apiBase;
-    
-    public IEnumerator UploadLap(string email, string name, float lap_time, int participents, string room_name)
+
+    public IEnumerator UploadLap(string email, string name, float lap_time, int participents, string room_name, int course_num)
     {
         Debug.Log("WebCalls: Uploading Lap Time");
         string hash = Md5Sum(email + name + apiKey);
@@ -21,24 +21,25 @@ public class WebCalls : MonoBehaviour
         form.AddField("lap_time", lap_time.ToString());
         form.AddField("participents", participents.ToString());
         form.AddField("room_name", room_name);
+        form.AddField("course_num", course_num);
         form.AddField("hash", hash);
         form.AddField("api", apiKey);
         using (UnityWebRequest www = UnityWebRequest.Post(apiBase, form))
         {
             yield return www.SendWebRequest();
-            
+
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Debug.Log("WebCalls: " + www.error);
             }
-            else 
+            else
             {
                 Debug.Log("WebCalls: Lap uploaded");
             }
         }
         //WWW www = new WWW(apiBase, form);
     }
-    
+
     public IEnumerator UploadRace(string email, string name, float fastest_time, int number_laps, int participents, string room_name, float race_length)
     {
         Debug.Log("Uploading Race Results");
@@ -50,26 +51,26 @@ public class WebCalls : MonoBehaviour
         form.AddField("fastest_time", fastest_time.ToString());
         form.AddField("number_laps", number_laps.ToString());
         form.AddField("participents", participents.ToString());
-        form.AddField("room_name", room_name);      
+        form.AddField("room_name", room_name);
         form.AddField("race_length", race_length.ToString());
         form.AddField("hash", hash);
         form.AddField("api", apiKey);
         using (UnityWebRequest www = UnityWebRequest.Post(apiBase, form))
         {
             yield return www.SendWebRequest();
-            
+
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Debug.Log("WebCalls: " + www.error);
             }
-            else 
+            else
             {
                 Debug.Log("WebCalls: Race uploaded");
             }
         }
         //WWW www = new WWW(apiBase, form);
     }
-    
+
     public string Md5Sum(string strToEncrypt)
     {
         System.Text.UTF8Encoding ue = new System.Text.UTF8Encoding();
@@ -84,5 +85,5 @@ public class WebCalls : MonoBehaviour
             hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
         }
         return hashString.PadLeft(32, '0');
-    }    
+    }
 }
