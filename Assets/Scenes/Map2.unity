@@ -476,7 +476,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &197914197
 Canvas:
   m_ObjectHideFlags: 0
@@ -1160,7 +1159,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &418439539
 Canvas:
   m_ObjectHideFlags: 0
@@ -1312,7 +1310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.1
+      value: 25.7
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1320,7 +1318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -88.6
+      value: -88.3
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1328,7 +1326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.064018056
+      value: -0.19706923
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1336,7 +1334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99794877
+      value: 0.9803896
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_RootOrder
@@ -1348,7 +1346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -7.341
+      value: -22.731
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1441,7 +1439,6 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &705507995
@@ -1938,7 +1935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.9
+      value: 23.1
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1946,7 +1943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -43.7
+      value: -42.1
       objectReference: {fileID: 0}
     - target: {fileID: 3069159352048490872, guid: bb48333be47c0f0b7a441f0a2e724353, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2824,7 +2821,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &1497991121
 Canvas:
   m_ObjectHideFlags: 0
@@ -3004,7 +3000,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &1541009302
 Canvas:
   m_ObjectHideFlags: 0
@@ -3510,15 +3505,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b974c5c08f684144a8c03f16eb4ad6b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.4000006
+      value: -3.4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b974c5c08f684144a8c03f16eb4ad6b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.04
+      value: -0.03999996
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b974c5c08f684144a8c03f16eb4ad6b1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.9
+      value: 15.14
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b974c5c08f684144a8c03f16eb4ad6b1, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3526,7 +3521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b974c5c08f684144a8c03f16eb4ad6b1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.1155508
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b974c5c08f684144a8c03f16eb4ad6b1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -3534,7 +3529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b974c5c08f684144a8c03f16eb4ad6b1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9933016
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b974c5c08f684144a8c03f16eb4ad6b1, type: 3}
       propertyPath: m_RootOrder
@@ -3546,7 +3541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b974c5c08f684144a8c03f16eb4ad6b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 13.271
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b974c5c08f684144a8c03f16eb4ad6b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -3817,7 +3812,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &2008752395
 Canvas:
   m_ObjectHideFlags: 0

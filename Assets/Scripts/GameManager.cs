@@ -6,7 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
-
+using PathCreation;
+using PathCreation.Examples;
 
 namespace uk.droidbuilders.droid_racing
 {
@@ -107,7 +108,8 @@ namespace uk.droidbuilders.droid_racing
             Instance = this;
             webCalls = (WebCalls)GameObject.Find("WebCalls").GetComponent(typeof(WebCalls));
             finishLine = GameObject.FindWithTag("Finish").GetComponent<AudioSource>();
-            PhotonNetwork.InstantiateSceneObject("gonk_animated", new Vector3(54f, 2f, 14f ), Quaternion.identity, 0);
+            GameObject gonk = PhotonNetwork.InstantiateSceneObject("gonk_animated", new Vector3(54f, 2f, 14f ), Quaternion.identity, 0);
+
             if (playerPrefab == null)
             {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'",this);
@@ -138,6 +140,7 @@ namespace uk.droidbuilders.droid_racing
                    { "Map", PhotonNetwork.CurrentRoom.CustomProperties[MAP_PROP_KEY] }
                  };
                 PhotonNetwork.CurrentRoom.SetCustomProperties(options.CustomRoomProperties);
+                gonk.GetComponent<PathFollower>().pathCreator = GameObject.Find("Gonk Path").GetComponent<PathCreator>();
             }
             else
             {

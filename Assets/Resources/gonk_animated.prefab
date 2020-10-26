@@ -610,6 +610,7 @@ GameObject:
   - component: {fileID: -4289453447840737280}
   - component: {fileID: 6020365498351150961}
   - component: {fileID: 3338137996300514413}
+  - component: {fileID: 8098451979883026714}
   m_Layer: 0
   m_Name: gonk_animated
   m_TagString: Untagged
@@ -624,7 +625,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6324838805108475139}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.9075653, y: 0, z: 19.360771}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -632,7 +633,7 @@ Transform:
   - {fileID: 9085617879131290752}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!111 &5034120650827680631
 Animation:
   m_ObjectHideFlags: 0
@@ -699,7 +700,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ouch: {fileID: 8300000, guid: f265af8f72a2ec5acbead277375c60ac, type: 3}
   Target: {fileID: 6669135944633327545}
-  WayPoints: []
   curWaypoint: 0
   speed: 3
   stop_distance: 2
@@ -761,11 +761,11 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 1.66
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -780,6 +780,15 @@ AudioSource:
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.21326578
+      value: 0.42096227
+      inSlope: -1.410192
+      outSlope: -1.410192
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3579398
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
@@ -813,7 +822,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.022222223
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -851,6 +860,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &8098451979883026714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6324838805108475139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33aabe1a2dec93349b06e6e5dc51bc06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathCreator: {fileID: 0}
+  endOfPathInstruction: 0
+  speed: 3.5
 --- !u!1 &7142956915585096838
 GameObject:
   m_ObjectHideFlags: 0
