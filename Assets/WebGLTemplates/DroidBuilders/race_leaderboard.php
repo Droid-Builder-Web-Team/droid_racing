@@ -6,38 +6,26 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="TemplateData/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
+
  </head>
 
  <body>
 
-<script src="https://www.w3schools.com/lib/w3.js"></script>
-<script src="plugin/simple-bootstrap-paginator.js"></script>
-<script src="js/pagination-fastest.js"></script>
-<script src="js/pagination-championship.js"></script>
 
 <script>
-
-
-    function updateRacer(r) {
-      console.log("Racer name: " + r);
-      $.ajax({
-        url: "get_racer.php?name=" + encodeURIComponent(r),
-        dataType: "json",
-        cache: false,
-        success: function(data) {
-          $('#racer').html(data.html);
-        }
-      });
-
-    }
-
-
+$(document).ready( function () {
+    $('#leaderboard').DataTable();
+} );
 </script>
-
 <?php
 include("config.php");
 $conn = new mysqli($database_host, $database_user, $database_pass, $database_name);
@@ -45,58 +33,57 @@ $conn = new mysqli($database_host, $database_user, $database_pass, $database_nam
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+if (!isset($_REQUEST['course_num'])) {
+  $course_num = 0;
+} else {
+  $course_num = $_REQUEST['course_num'];
+}
 $sqlQuery = "SELECT MAX(x.uid), x.name, x.lap_time, x.added FROM racing_times x
     JOIN (SELECT p.name, MIN(lap_time)
-    AS lap_fastest FROM racing_times p GROUP BY p.name) y ON y.name = x.name
+    AS lap_fastest FROM racing_times p WHERE course_num = ".$course_num." GROUP BY p.name) y ON y.name = x.name
     AND y.lap_fastest = x.lap_time GROUP BY x.added, x.name, x.lap_time ORDER BY x.lap_time";
-$result = mysqli_query($conn, $sqlQuery);
-$totalRecords = mysqli_num_rows($result);
-$totalPagesFastest = ceil($totalRecords/$perPage);
-
-$sqlQuery = "SELECT count(*) FROM racing_games";
-$result = mysqli_query($conn, $sqlQuery);
-$totalRecords = mysqli_fetch_array($result)[0];
-$totalPagesChampionship = ceil($totalRecords/$perPage);
+$result_laptimes = mysqli_query($conn, $sqlQuery);
+$totalRecords = mysqli_num_rows($result_laptimes);
 ?>
 
 <div class="grid-container">
   <div class="Logo"><a href="https://droidbuilders.uk/"><img height=290px src=logo.png></a></div>
 
+  <div class="Courses">
+    <h2>Select Course</h2>
+    <ul>
+      <li><a href="?course_num=0">Classic</a></li>
+      <li><a href="?course_num=1">Halloween</a></li>
+      <li><a href="?course_num=2">Practice</a></li>
+    </ul>
+  </div>
+
   <div class="Fastest-Laps">
     <table class=leaderboard id=leaderboard>
       <thead>
         <tr>
-          <th>Run date</th>
-          <th>Course</th>
           <th>Position</th>
+          <th>Run date</th>
           <th>Contender</th>
           <th>Final Time</th>
         </tr>
       </thead>
       <tbody id="fastest-content">
+        <?php
+          $pos=0;
+          while($row = $result_laptimes->fetch_assoc()) {
+            $pos++;
+            echo "<tr>";
+            echo "<td>".$pos."</td>";
+            echo "<td>".$row['added']."</td>";
+            echo "<td>".$row['name']."</td>";
+            echo "<td>".$row['lap_time']."</td>";
+            echo "</tr>";
+          }
+        ?>
       </tbody>
     </table>
-    <div id="pagination-fastest"></div>
-    <input type="hidden" id="totalPagesFastest" value="<?php echo $totalPagesFastest; ?>">
-  </div>
-
-  <div class=Championship>
-    <table class=leaderboard id=leaderboard>
-      <thead>
-        <tr>
-          <th>Run date</th>
-          <th>Position</th>
-          <th>Contender</th>
-          <th>Laps</th>
-          <th>Average Time</th>
-          <th>Fastest Time</th>
-        </tr>
-      </thead>
-      <tbody id="championship-content">
-      </tbody>
-    </table>
-    <div id="pagination-championship"></div>
-    <input type="hidden" id="totalPagesChampionship" value="<?php echo $totalPagesChampionship; ?>">
   </div>
 
   <div class="Top-Racers" id="racer">

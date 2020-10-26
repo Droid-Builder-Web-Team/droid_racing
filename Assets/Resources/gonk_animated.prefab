@@ -699,12 +699,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ouch: {fileID: 8300000, guid: f265af8f72a2ec5acbead277375c60ac, type: 3}
-  Target: {fileID: 6669135944633327545}
-  curWaypoint: 0
-  speed: 3
-  stop_distance: 2
-  PauseTimer: 1
-  curTimer: 0
 --- !u!114 &-7135366061952781448
 MonoBehaviour:
   m_ObjectHideFlags: 0

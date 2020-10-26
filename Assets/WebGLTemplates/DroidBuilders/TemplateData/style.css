@@ -1,4 +1,4 @@
-body { 	padding: 0; 
+body { 	padding: 0;
 	margin: 0;
 	background-color: #364b96;
 	background-image: url( https://droidbuilders.uk/wp-content/uploads/2019/10/BGimage.png );
@@ -23,11 +23,11 @@ body { 	padding: 0;
 #unity-footer { position: relative }
 .unity-mobile #unity-footer { display: none }
 #unity-webgl-logo { float:left; width: 204px; height: 38px; background: url('webgl-logo.png') no-repeat center }
-#unity-build-title { float: right; 
-	margin-right: 10px; 
-	line-height: 38px; 
-	font-family: arial; 
-	font-size: 28px; 
+#unity-build-title { float: right;
+	margin-right: 10px;
+	line-height: 38px;
+	font-family: arial;
+	font-size: 28px;
 	color: grey
  }
 #unity-fullscreen-button { float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center }
@@ -143,31 +143,31 @@ table tr,td,th{
   grid-template-columns: 350px 1fr 1fr 1fr;
   grid-template-rows: 300px auto 40px;
   gap: 1px 1px;
-  grid-template-areas: "Logo Top-Racers Top-Racers Top-Racers" "Fastest-Laps Fastest-Laps Championship Championship" "Footer Footer Footer Footer";
+  grid-template-areas: "Logo Top-Racers Top-Racers Top-Racers" "Courses Fastest-Laps Fastest-Laps Fastest-Laps" "Footer Footer Footer Footer";
 }
 
-.Fastest-Laps { grid-area: Fastest-Laps; 
+.Fastest-Laps { grid-area: Fastest-Laps;
 	margin-left: auto;
 	margin-right: auto;
 	width: 95%;
 }
 
-.Championship { grid-area: Championship;
+.Courses { grid-area: Courses;
 	margin-left: auto;
 	margin-right: auto;
-	width: 95%;	
+	width: 95%;
 }
 
-.Logo { grid-area: Logo; 
+.Logo { grid-area: Logo;
 	padding: 5px;
 }
 
-.Footer { grid-area: Footer; 
+.Footer { grid-area: Footer;
 	color: grey;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.Top-Racers { grid-area: Top-Racers; 
-	
+.Top-Racers { grid-area: Top-Racers;
+
 }
