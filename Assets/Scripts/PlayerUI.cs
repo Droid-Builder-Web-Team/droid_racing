@@ -31,8 +31,6 @@ namespace uk.droidbuilders.droid_racing
         [SerializeField]
         public Text elapsedTimeText;
 
-        public Text isMaster;
-
         #endregion
 
         #region Private Fields
@@ -75,12 +73,6 @@ namespace uk.droidbuilders.droid_racing
             if (elapsedTimeText != null)
             {
                 elapsedTimeText.text = target.elapsedTime.ToString("F2") + "s";
-            }
-
-            if (target.GetComponent<AudioListener>().enabled) {
-                isMaster.text = "Y";
-            } else {
-                isMaster.text = "N";
             }
 
         }
