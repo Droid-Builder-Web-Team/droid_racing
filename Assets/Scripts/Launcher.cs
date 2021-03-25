@@ -48,7 +48,7 @@ namespace uk.droidbuilders.droid_racing
         /// <summary>
         /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
         /// </summary>
-        string gameVersion = "2";
+        string gameVersion = "3";
         /// <summary>
         /// Keep track of the current process. Since connection is asynchronous and is based on several callbacks from Photon,
         /// we need to keep track of this to properly adjust the behavior when we receive call back by Photon.
@@ -135,6 +135,9 @@ namespace uk.droidbuilders.droid_racing
                 break;
             case 2:
                 raceName = "Practice" + raceNumber;
+                break;
+            case 3:
+                raceName = "Xmas" + raceNumber;
                 break;
             default:
                 raceName = "ERROR" + raceNumber;

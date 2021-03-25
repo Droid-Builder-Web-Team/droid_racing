@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="TemplateData/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="TemplateData/dataTables.css">
 
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
   <script src="https://www.w3schools.com/lib/w3.js"></script>
@@ -54,8 +54,11 @@ $totalRecords = mysqli_num_rows($result_laptimes);
     <h2>Select Course</h2>
     <ul>
       <li><a href="?course_num=0">Classic</a></li>
-      <li><a href="?course_num=1">Halloween</a></li>
       <li><a href="?course_num=2">Practice</a></li>
+      <li><a href="?course_num=1">Halloween</a></li>
+      <li><a href="?course_num=3">Xmas</a></li>
+      <li><a href="?course_num=4">Easter</a></li>
+
     </ul>
   </div>
 

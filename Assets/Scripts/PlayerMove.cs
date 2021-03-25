@@ -87,6 +87,13 @@ public class PlayerMove : MonoBehaviourPun
             {
                 Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
             }
+
+            ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+            hashtable.Add("rValue", color.r);
+            hashtable.Add("gValue", color.g);
+            hashtable.Add("bValue", color.b);
+            hashtable.Add("laps", 0);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
         }
     }
 
