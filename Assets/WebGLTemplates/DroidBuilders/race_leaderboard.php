@@ -58,6 +58,7 @@ $totalRecords = mysqli_num_rows($result_laptimes);
       <li><a href="?course_num=1">Halloween</a></li>
       <li><a href="?course_num=3">Xmas</a></li>
       <li><a href="?course_num=4">Easter</a></li>
+      <li><a href="?course_num=5">Summer</a></li>
 
     </ul>
   </div>

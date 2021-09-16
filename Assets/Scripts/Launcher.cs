@@ -139,6 +139,12 @@ namespace uk.droidbuilders.droid_racing
             case 3:
                 raceName = "Xmas" + raceNumber;
                 break;
+            case 4:
+                raceName = "Easter" + raceNumber;
+                break;
+            case 5:
+                raceName = "Summer" + raceNumber;
+                break;
             default:
                 raceName = "ERROR" + raceNumber;
                 break;

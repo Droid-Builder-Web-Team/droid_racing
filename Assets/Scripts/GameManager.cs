@@ -139,6 +139,7 @@ namespace uk.droidbuilders.droid_racing
                    { "StartTime", stateTime},
                    { "Map", PhotonNetwork.CurrentRoom.CustomProperties[MAP_PROP_KEY] }
                  };
+                Debug.Log("GameManager: Starting Gonk!");
                 PhotonNetwork.CurrentRoom.SetCustomProperties(options.CustomRoomProperties);
                 gonk.GetComponent<PathFollower>().pathCreator = GameObject.Find("Gonk Path").GetComponent<PathCreator>();
             }
